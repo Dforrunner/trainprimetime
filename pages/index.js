@@ -7,14 +7,15 @@ import Slider from "react-slick";
 import {useEffect, useState} from "react";
 import Map from "../components/GoogleMap";
 import {SliderLeftBtn} from "../components/Buttons";
+import Image from "next/image";
 
 const LearnMoreBtn = ({href = '#', title = 'Learn More', className}) =>
-    <a
+    <Link
         className={'inline-block rounded border border-secondary hover:border-primary hover:text-secondary px-8 py-2 text-sm font-medium hover:bg-[rgba(50,50,50,0.2)] active:bg-[rgb(50,50,50)] ' + className}
         href={href}
     >
         {title}
-    </a>
+    </Link>
 
 const Services = () => {
 
@@ -104,7 +105,7 @@ const WhyChooseUs = () => {
 const Welcome = () => {
     return <section className='w-full h-[550px] bg-white text-primary relative overflow-hidden'>
         <div
-            className='w-full lg:w-[90%] h-full py-[100px] px-8 md:px-20 absolute bg-gradient-to-r from-white via-white to-transparent'>
+            className='w-full lg:w-[90%] h-full py-[100px] px-8 md:px-20 absolute bg-gradient-to-r from-white via-white to-transparent z-[1]'>
             <h1 className='lg:text-4xl text-2xl'>WELCOME TO PRIMETIME</h1>
             <div className='w-full md:w-1/2 text-[15px] mb-5'>
                 <p className=' mt-5'>
@@ -125,7 +126,9 @@ const Welcome = () => {
             <SliderLeftBtn href='/about'/>
         </div>
 
-        <img src='/pt_group.jpeg' alt='Group Picture' className='h-full w-auto float-right md:mr-[-75px]'/>
+        <div className='h-full float-right md:mr-[-75px]'>
+            <Image src='/pt_group.jpeg' alt='Group Picture' width='800' height='550' />
+        </div>
     </section>
 }
 
@@ -156,7 +159,7 @@ const Results = () => {
 
     const Slide = ({imgSrc}) =>
         <div className='m-2 bg-third'>
-            <img src={imgSrc} alt='Before and after image'/>
+            <Image src={imgSrc} alt='Before and after image' width='350' height='370'/>
         </div>
 
     return <section className='w-full h-[630px] bg-primary p-10'>
@@ -191,7 +194,7 @@ const Testimonials = () => {
     const Slide = ({text, name}) =>
         <div className='p-10 h-[300px] text-primary flex flex-col justify-center items-center border-[1px] border-[rgba(0,0,0,0.3)] border-primary rounded-[5px] m-10'>
             <FiveStars/>
-            <p className='p-10 text-center'>"{text}"</p>
+            <p className='p-10 text-center'>&quot;{text}&quot;</p>
             <p>-{name}</p>
         </div>
 
@@ -238,7 +241,9 @@ const SignUp = () => {
         <h1 className='text-4xl'>SIGN UP TODAY AND GET</h1>
         <h2 className='text-6xl text-bold'>21 DAY FREE TRIAL</h2>
         <div className='p-10'>
-            <a className='glow-btn' href="/join">START FREE TRIAL</a>
+            <span className='glow-btn'>
+                <Link  href="/join">START FREE TRIAL</Link>
+            </span>
         </div>
     </section>
 }
@@ -260,23 +265,23 @@ const Locations = () => {
         <h1 className='text-primary text-2xl text-center '>OUR LOCATIONS:</h1>
 
             <div className='w-[300px] text-center border-[1px] border-[rgba(0,0,0,0.4)] rounded p-5'>
-                <a href='https://g.page/TrainPrimeTime?share' target='_blank' className='hover:underline'>
+                <a href='https://g.page/TrainPrimeTime?share' target='_blank' rel='noreferrer' className='hover:underline'>
                     <h2 className='text-lg text-bold text-secondary'>St. Peters, MO</h2>
                     <p>4039 N St. Peters Pkwy</p>
                     <p>St. Peters, MO 63304</p>
                 </a>
 
-                <a href="tel:(636) 303-1780" rel="noopener noreferrer" className='text-bold text-third hover:underline'>(636) 303-1780</a>
+                <a href='tel:(636) 303-1780' rel='noopener noreferrer' className='text-bold text-third hover:underline'>(636) 303-1780</a>
             </div>
 
             <div className='w-[300px] text-center border-[1px] border-[rgba(0,0,0,0.4)] rounded p-5 '>
-                <a href='https://goo.gl/maps/5LHvuxoi4CAJQR2B8' target='_blank' className='hover:underline'>
+                <a href='https://goo.gl/maps/5LHvuxoi4CAJQR2B8' target='_blank' rel='noreferrer' className='hover:underline'>
                     <h2 className='text-lg text-bold text-secondary'>Creve Coeur, MO</h2>
                     <p>11949 Olive Blvd</p>
                     <p>Creve Coeur, MO 63141</p>
                 </a>
 
-                <a href="tel:(636) 303-1780" rel="noopener noreferrer" className='text-bold text-third hover:underline'>(636) 242-6039</a>
+                <a href='tel:(636) 303-1780' rel='noopener noreferrer' className='text-bold text-third hover:underline'>(636) 242-6039</a>
             </div>
 
 
@@ -297,7 +302,9 @@ export default function Home() {
                 <div>
                     <h1 className='animate__animated animate__slideInLeft'>LOOK FORWARD TO <b>TRAINING</b><br/> A NEW YOU</h1>
                     <div className='animate__animated animate__slideInUp h-[80px]'>
-                        <a className='glow-btn' href="/join">BECOME A MEMBER</a>
+                        <span className='glow-btn'>
+                            <Link  href="/join">BECOME A MEMBER</Link>
+                        </span>
                     </div>
 
                 </div>

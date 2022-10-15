@@ -1,10 +1,11 @@
 import {useState, useEffect} from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const ListItem = ({href, title}) =>
     <li className='inline-block text-center p-2 transition-all ease-in-out duration-500 hover:text-secondary'>
         <Link href={href}>
-            <a>{title}</a>
+            {title}
         </Link>
     </li>
 
@@ -29,9 +30,10 @@ const Nav = () => {
             padding: resize ? '8px' : '15px'
         }}
     >
-        <a href='/' className='h-full'>
-            <img className='h-full' src='/primetime_logo.png' alt='PrimeTime Logo'/>
-        </a>
+
+        <Link href='/'>
+            <Image className='h-full' src='/primetime_logo.png' alt='PrimeTime Logo' width='200' height='70'/>
+        </Link>
 
 
         <ul className='m-0 flex text-black'>
