@@ -1,9 +1,26 @@
-html,
+@import "slick-carousel/slick/slick-theme.css";
+@import "slick-carousel/slick/slick.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:  Segoe UI, Helvetica Neue, sans-serif;
+}
+
+.slick-prev:before {
+  content: "<";
+  color: #6f6f6f;
+  font-size: 30px;
+}
+
+.slick-next:before {
+  content: ">";
+  color: #6f6f6f;
+  font-size: 30px;
 }
 
 a {
@@ -11,8 +28,67 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-weight: 300;
+}
+
 * {
   box-sizing: border-box;
+  /*border: 1px solid red;*/
+}
+
+/**
+ * Remove focus styles for non-keyboard focus.
+ */
+a:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
+/**
+ * Cross-browser styles for explicit focus via
+ * keyboard-based (eg Tab) navigation or the
+ * .focus-visible utility class.
+ */
+a:focus,
+.focus-visible:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow:
+          0 0 0 .2rem #fff,
+          0 0 0 .35rem #069;
+}
+
+.glow-btn {
+  color: #1e191a;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px 30px;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 8vw;
+  max-width: 100px;
+  transition-property: all;
+  transition-duration: .6s;
+  transition-timing-function: ease;
+  border-radius: 3px;
+
+  border: 0 solid;
+  box-shadow: inset 0 0 20px rgba(255, 185, 142, 0.11);
+  outline: rgb(56, 56, 56) solid 1px;
+  outline-offset: 0;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.glow-btn:hover {
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(205, 205, 205, 0.2);
+  outline-color: white;
+  outline-offset: 10px;
+  text-shadow: 0 0 4px white;
+  color: white;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +99,73 @@ a {
     color: white;
     background: black;
   }
+}
+
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__slideInLeft {
+  -webkit-animation-name: slideInLeft;
+  animation-name: slideInLeft;
+}
+@-webkit-keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__slideInUp {
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
 }

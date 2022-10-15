@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+//
+//Push changed with: npx prisma db push
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Home {
+    id Int     @id @default(autoincrement())
+    headerText String
+    headerButtonText String
+    headerImg String @unique
+    headerImgFormat   String
+    headerImgVersion  String
+}
