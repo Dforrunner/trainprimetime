@@ -48,15 +48,6 @@ const ContactForm = () => {
 
             </div>
 
-            <select
-                name='location'
-                className='w-full rounded-lg border-gray-200 p-3 text-sm text-muted'
-                required>
-                <option disabled selected>Select Location</option>
-                <option value='stpeters' className='text-white'>St. Peters, MO</option>
-                <option value='crevecoeur' className='text-white'>Creve Coeur, MO</option>
-            </select>
-
             <textarea
                 className="w-full rounded-lg border-gray-200 p-3 text-sm text-white"
                 placeholder="Message (max 1000 characters)"

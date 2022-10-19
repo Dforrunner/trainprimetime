@@ -5,6 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #1e191a;
+  --secondary-color: #2eaee4;
+  --third-color: #e84039;
+
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -59,7 +69,6 @@ a:focus,
 }
 
 .glow-btn {
-  color: #1e191a;
   cursor: pointer;
   font-size: 18px;
   padding: 10px 30px;
@@ -101,12 +110,8 @@ a:focus,
   }
 }
 
-:root {
-  --animate-duration: 1s;
-  --animate-delay: 1s;
-  --animate-repeat: 1;
-}
-.animate__animated {
+
+.animate {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
@@ -137,7 +142,7 @@ a:focus,
     transform: translate3d(0, 0, 0);
   }
 }
-.animate__slideInLeft {
+.slideInLeft {
   -webkit-animation-name: slideInLeft;
   animation-name: slideInLeft;
 }
@@ -165,7 +170,7 @@ a:focus,
     transform: translate3d(0, 0, 0);
   }
 }
-.animate__slideInUp {
+.slideInUp {
   -webkit-animation-name: slideInUp;
   animation-name: slideInUp;
 }

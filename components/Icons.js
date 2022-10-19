@@ -66,3 +66,8 @@ export const InstagramWhite = ({className}) =>
         className={className}
         alt=''
     />
+
+export const CloseIcon = () =>
+    <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACC0lEQVRoge3YS6hNURzH8Y+D3Mt1rzwHnolSN4+BR0JEKSNighHduGRgZHS7A4+RERl4TCUGjGQiSZIy8TZgQHmlvB8TpAzWPbqD0+mcvfc651yt73Cv9f+tX7v1/+///pNIJBKJRGPpwv6I+nsxKaL+PzrwBrsiaG/Ha3RG0K7IavzA/AI1Z+Mz1hWoWRNH8AjtBWiNwG0cLkAr0+G3cKIAraO4g5EFaGViOj5gUw6N9fiEWYU4ysGWASMzMsROxltsK9RRDk7jJobXETMMl3EmiqOMtOEB+uuIOYAnGB3FUQ668R1rati7GN+wKKqjHOzBK0yosqcDT7GvIY5ycAGXqqyfxRUhR1qacXiB3gprO4QWZGJDHeVgmZADCwY9m4MvWNsURznox2OhKo3CXRyMdVjMe1rCVTzDLyzHSvyOeGY0puI9PmJmzINKMcUHEb1CpatVA+Vkb9eAZI/FUv9B+S1/EHdXWOsxhD6I53Gxyvo5Q6BF6cVLjK+ypwvPtXDT2I2vWFHD3iVCDi2M6igDbbiPvjpi+rTgj9VJ3FDfr24J13AqiqMMbBZakCzDhyl4h62FOsrANGEctDGHxgZNHgeVcB3HCtA6rokDukN4KCR6XprWwqwSSu28AjXnanALM1aYlOyMoN0zoD2m3sB6ymWZTuHNxZgQ3sMf4cr+jKCfSCQSiURF/gLJbVtY3dcutgAAAABJRU5ErkJggg=="        alt=''
+    />
