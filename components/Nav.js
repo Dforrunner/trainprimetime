@@ -15,7 +15,7 @@ const Nav = () => {
     const [open, setOpen] = useState(false);
 
     const handleScroll = () => {
-        window.scrollY >= 210
+        window.scrollY >= 10
             ? setResize(true)
             : setResize(false);
     };
@@ -25,10 +25,12 @@ const Nav = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     });
 
-    return <nav className='sticky top-0 right-0 z-[300]'>
+    return <nav className='bg-white transition-all duration-500' style={{
+        height: resize ? '50px' : '100px'
+    }}>
 
-        <div className={`w-full flex flex-row justify-between items-center w-full bg-white
-                         border-b-[1px] border-black transition-all ease-in-out duration-500`}
+        <div className={`w-full flex flex-row justify-between items-center w-full bg-white drop-shadow border-black 
+                         transition-all ease-in-out duration-500 fixed w-full top-0 right-0 z-[300]`}
              style={{
                  height: resize ? '50px' : '100px',
                  padding: resize ? '8px' : '15px'

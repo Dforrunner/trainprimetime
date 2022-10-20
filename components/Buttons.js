@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const SliderLeftBtn = ({title = 'LEARN MORE', href}) =>
     <span
-        className="group relative inline-block overflow-hidden border border-secondary px-8 py-3 focus:outline-none focus:ring rounded">
+        className="group relative inline-block overflow-hidden border border-secondary px-8 py-3 focus:outline-none focus:ring rounded cursor-pointer">
         <Link href={href}>
             <span>
                 <span

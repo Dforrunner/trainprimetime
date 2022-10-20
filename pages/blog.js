@@ -1,7 +1,14 @@
 import {Footer, Nav} from "../components";
+import Head from "next/head";
 
 const Blog = () => {
-    return <div>
+    return <>
+        <Head>
+            <title>
+                Blog - PrimeTime Personal Training
+            </title>
+        </Head>
+
         <Nav />
 
         <section className='w-full min-h-[600px] bg-white text-black'>
@@ -10,7 +17,7 @@ const Blog = () => {
         </section>
 
         <Footer />
-    </div>
+    </>
 }
 
 export  default Blog;

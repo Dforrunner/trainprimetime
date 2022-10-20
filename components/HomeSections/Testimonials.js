@@ -32,7 +32,7 @@ const Testimonials = () => {
                 Don’t walk, RUN to PrimeTime and sign yourself up. You won’t regret it! 
                 (Truth: you will actually probably feel regret for signing up while you 
                 are in a session with one of the trainers but that feeling goes away 
-                soon as the session ends, promise 😜💪😁👊)`}
+                soon as the session ends, promise 😜💪😁👊`}
                 name={'Kris Redell'}/>
             <Slide
                 text={`Great group of trainers, so far what I have seen of what 

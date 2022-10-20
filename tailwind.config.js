@@ -4,6 +4,9 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
+  plugins: [
+    require('tailwind-clip-path'),
+  ],
   theme: {
     extend: {
       dropShadow: {
@@ -15,7 +18,9 @@ module.exports = {
     },
     colors: {
       primary: '#1e191a',
+      'primary-dark': '#181415',
       secondary: '#e84039',
+      'secondary-dark': '#e73128',
       third: '#2eaee4',
       'gray-dark': '#273444',
       'gray': '#8492a6',
@@ -299,5 +304,4 @@ module.exports = {
       'blue-grey-900': '#263238',
     }
   },
-  plugins: [],
 }

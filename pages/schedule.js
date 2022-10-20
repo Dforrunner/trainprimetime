@@ -1,7 +1,14 @@
 import {Footer, Nav} from "../components";
+import Head from "next/head";
 
 const Schedule = () => {
-    return <div>
+    return <>
+        <Head>
+            <title>
+                Schedule - PrimeTime Personal Training
+            </title>
+        </Head>
+
         <Nav/>
 
         <section className='w-full min-h-[600px] bg-white text-black flex flex-col items-center p-20'>
@@ -949,7 +956,7 @@ const Schedule = () => {
         </section>
 
         <Footer/>
-    </div>
+    </>
 }
 
 export default Schedule;

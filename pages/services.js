@@ -1,8 +1,15 @@
 import {Footer, Nav} from "../components";
 import {SliderLeftBtn} from "../components/Buttons";
+import Head from "next/head";
 
 const Services = () => {
-    return <div>
+    return <>
+        <Head>
+            <title>
+                Services - PrimeTime Personal Training
+            </title>
+        </Head>
+
         <Nav />
 
 
@@ -32,7 +39,7 @@ const Services = () => {
 
         </section>
         <Footer />
-    </div>
+    </>
 }
 
 export  default Services;

@@ -1,7 +1,14 @@
 import {ContactForm, Footer, Nav} from "../components";
+import Head from "next/head";
 
 const Contact = () => {
-    return <div>
+    return <>
+        <Head>
+            <title>
+                Contact Us - PrimeTime Personal Training
+            </title>
+        </Head>
+
         <Nav />
 
         <section className='bg-white p-10 text-black'>
@@ -9,7 +16,7 @@ const Contact = () => {
         </section>
 
         <Footer />
-    </div>
+    </>
 }
 
 export  default Contact;

@@ -2,6 +2,7 @@ import {FacebookWhite, InstagramWhite} from "./Icons";
 import ContactForm from './ContactForm'
 import Image from "next/image";
 
+
 const Footer = () => {
    return <footer className='w-full m-h-[650px] flex flex-col justify-center items-center bg-primary'>
       <div className='w-full flex flex-col md:flex-row justify-center items-center md:justify-between bg-primary'>
@@ -53,7 +54,7 @@ const Footer = () => {
 
 
       <p
-         className='mt-10 h-full text-muted w-full bg-black text-sm text-center p-5'>
+         className='mt-10 h-full text-muted w-full bg-primary-dark text-sm text-center p-5'>
          Copyright &copy;2022 Train Primetime | All Rights Reserved
       </p>
    </footer>

@@ -1,7 +1,14 @@
 import {Footer, Nav} from "../components";
+import Head from "next/head";
 
 const Franchise = () => {
-    return <div>
+    return <>
+        <Head>
+            <title>
+                Franchise - PrimeTime Personal Training
+            </title>
+        </Head>
+
         <Nav />
         <section className='w-full min-h-[600px] bg-white text-black'>
             <h1>Franchise content ...</h1>
@@ -9,7 +16,7 @@ const Franchise = () => {
         </section>
 
         <Footer />
-    </div>
+    </>
 }
 
 export  default Franchise;
