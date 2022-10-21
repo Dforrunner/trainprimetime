@@ -60,7 +60,7 @@ const Card = ({bgUrl = '', title, summary, href}) => {
 
 const ServicesSection = () => {
 
-   return <section>
+   return <div>
 
       <div className='bg-[url("/orangeBg.png")] w-full h-[200px] flex flex-col justify-center items-center'>
          <h1 className='text-3xl'>WHAT WE OFFER</h1>
@@ -71,12 +71,12 @@ const ServicesSection = () => {
       </div>
 
       <div className='w-full flex md:flex-row flex-col flex-nowrap'>
-         {serviceList.map(i =>
-            <Card {...i}/>
+         {serviceList.map((i, index) =>
+            <Card key={`${i.title+index}`} {...i}/>
          )}
       </div>
 
-   </section>
+   </div>
 }
 
 export default ServicesSection;
