@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Slider from "react-slick";
 
-const BeforeAndAfters = () => {
+const list = [
+   '/ba.jpeg',
+   '/ba1.jpeg',
+   '/ba2.jpeg',
+   '/ba3.jpeg',
+   '/ba4.jpeg',
+   '/ba5.jpeg'
+]
 
+const BeforeAndAfters = ({imageList = list}) => {
 
    const settings = {
       dots: true,
@@ -46,12 +54,9 @@ const BeforeAndAfters = () => {
       </div>
 
       <Slider {...settings}>
-         <Slide imgSrc={'/ba.jpeg'}/>
-         <Slide imgSrc={'/ba1.jpeg'}/>
-         <Slide imgSrc={'/ba2.jpeg'}/>
-         <Slide imgSrc={'/ba3.jpeg'}/>
-         <Slide imgSrc={'/ba4.jpeg'}/>
-         <Slide imgSrc={'/ba5.jpeg'}/>
+         {imageList.map(src =>
+            <Slide imgSrc={src}/>
+         )}
       </Slider>
    </section>
 }

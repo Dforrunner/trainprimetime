@@ -13,10 +13,20 @@ datasource db {
 }
 
 model Home {
-    id Int     @id @default(autoincrement())
-    headerText String
-    headerButtonText String
-    headerImg String @unique
-    headerImgFormat   String
-    headerImgVersion  String
+    id                  Int         @id @default(autoincrement())
+    headerText          String?
+    headerButtonText    String?
+    headerImg           String?
+}
+
+model Testimonials {
+    id                  Int         @id @default(autoincrement())
+    text                String      @db.Text
+    writter             String
+}
+
+model Services {
+    id                  Int         @id @default(autoincrement())
+    name                String
+    summery             String      @db.Text
 }

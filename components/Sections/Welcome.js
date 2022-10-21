@@ -7,7 +7,7 @@ const Welcome = () => {
          className={`w-full h-full py-[100px] px-8 md:px-10 xl:px-20 absolute bg-gradient-to-r 
                      from-white via-white to-[rgba(255,255,255,0.5)] md:to-transparent z-[1]`}>
          <h1 className='lg:text-4xl text-2xl'>WELCOME TO PRIMETIME</h1>
-         <div className='w-full md:w-1/2 text-[15px] md:text-[16px] lg:text-[17px] mb-5 '>
+         <div className='w-full md:w-1/2 text-[15px] md:text-[16px] mb-5'>
             <p className=' mt-5'>
                We get to work with people who are ready for a change and fed up with the status quo. Where other
                programs may have failed in the past, we take a holistic approach that delivers sustainable results

@@ -13,6 +13,7 @@ module.exports = {
         'secondary': '0 0 5px #e84039',
       },
       transitionDuration: {
+        '200': '200ms',
         '2000': '2000ms',
       }
     },

@@ -1,17 +1,11 @@
-import {Footer, Nav} from "../components";
-import Head from "next/head";
+import {DocHead} from "../components";
+
 
 const Join = () => {
     return <>
-        <Head>
-            <title>
-                Sign Up - PrimeTime Personal Training
-            </title>
-        </Head>
+        <DocHead title='Sing Up - PrimeTime Personal Training' />
 
-        <Nav />
         <h1>Join</h1>
-        <Footer />
     </>
 }
 

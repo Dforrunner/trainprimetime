@@ -1,22 +1,13 @@
-import {Footer, Nav} from "../components";
-import Head from "next/head";
+import {DocHead} from "../components";
 
 const Blog = () => {
     return <>
-        <Head>
-            <title>
-                Blog - PrimeTime Personal Training
-            </title>
-        </Head>
-
-        <Nav />
+        <DocHead title='Blog - PrimeTime Personal Training' />
 
         <section className='w-full min-h-[600px] bg-white text-black'>
             <h1>Blog content ...</h1>
 
         </section>
-
-        <Footer />
     </>
 }
 
