@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {Banner, BeforeAndAfters, ServicesSection, Testimonials, Welcome, WhyChooseUs} from "../components/Sections";
 
 const Home = ({data}) => {
-   console.log({data})
+
    return (
       <>
          <DocHead title='PrimeTime Personal Training - The Best Fitness Training In St. Louis'/>

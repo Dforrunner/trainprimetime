@@ -1,5 +1,6 @@
 import {FiveStars} from "../index";
 import Slider from "react-slick";
+import { v4 as uuidv4 } from 'uuid';
 
 const defaultTestimonies = [
    {
@@ -58,6 +59,7 @@ const Testimonials = ({testimonies = defaultTestimonies}) => {
       <Slider {...settings}>
          {testimonies.map(({text, name}) =>
             <Slide
+               key={uuidv4()}
                text={text}
                name={name}
             />

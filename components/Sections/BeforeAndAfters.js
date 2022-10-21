@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Slider from "react-slick";
+import { v4 as uuidv4 } from 'uuid';
 
 const list = [
    '/ba.jpeg',
@@ -54,8 +55,8 @@ const BeforeAndAfters = ({imageList = list}) => {
       </div>
 
       <Slider {...settings}>
-         {imageList.map(src =>
-            <Slide imgSrc={src}/>
+         {imageList.map((src, index) =>
+            <Slide key={uuidv4()} imgSrc={src}/>
          )}
       </Slider>
    </section>

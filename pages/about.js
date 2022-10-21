@@ -1,7 +1,7 @@
 import {DocHead} from "../components";
 import Image from 'next/image';
 import {Banner, SignUp, WhyChooseUs, HeaderSection} from "../components/Sections";
-import {Checkmark} from "../components/Icons";
+
 import {CheckList} from "../components";
 
 const OurMissionSection = () => {
