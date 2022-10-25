@@ -1,4 +1,5 @@
 import Trainer from "../../components/Sections/Trainer";
+import {Banner} from "../../components/Sections";
 
 
 const Location = ({title, schedule}) => {
@@ -10,6 +11,7 @@ const Location = ({title, schedule}) => {
       </div>
 
       <Trainer/>
+      <Banner />
    </div>
 }
 
