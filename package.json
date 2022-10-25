@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
     "@prisma/client": "^4.5.0",
     "@react-google-maps/api": "^2.13.1",
     "cloudinary": "^1.32.0",
@@ -23,6 +27,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@emotion/cache": "^11.10.3",
     "autoprefixer": "^10.4.12",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",

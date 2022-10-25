@@ -1,21 +1,45 @@
-import { useRouter } from 'next/router';
 import Trainer from "../../components/Sections/Trainer";
 
-const Location = () => {
-   const router = useRouter()
-   const { location } = router.query
 
+const Location = ({title, schedule}) => {
    return <div>
-      <h1>Location {location}</h1>
-      <Trainer />
+      <div className='px-20 bg-white w-full'>
+         <h1 className='text-black text-2xl text-center py-10'> PrimeTime {title} Schedule</h1>
 
-      <div className='p-20 bg-white w-full'>
-         <div className="text-container" dangerouslySetInnerHTML={{ __html:`<iframe src="https://primetimepersonaltraining.sites.zenplanner.com/calendar.cfm?frame=true" style="width: 100%; height: 1408px;" onload="window.scroll(0,0);" frameborder="0" id="idZenPlannerFrame" height="1408px">
-</iframe>`}} />
+         <div className='text-container' dangerouslySetInnerHTML={{__html: schedule}}/>
       </div>
+
+      <Trainer/>
    </div>
 }
 
+export const getServerSideProps = async (context) => {
+   const {location} = context.params;
+   console.log({location})
+   const loc = {
+      'st-peters': {
+         title: 'St. Peters',
+         schedule: `<iframe src='https://primetimepersonaltraining.sites.zenplanner.com/calendar.cfm?frame=true' style='width: 100%; height: 1408px; overflow: hidden;' onload='window.scroll(0,0);' frameborder='0' id='idZenPlannerFrame' scrolling='no' height='1408px'>
+                     </iframe>`
+      },
+      'creve-coeur': {
+         title: 'Creve Couer',
+         schedule: `<iframe src='https://trial-F32D97C1.zenplanner.com/zenplanner/portal/calendar.cfm?frame=true' style='width: 100%; height: 1348px; overflow: hidden;' onload='window.scroll(0,0);' frameborder='0' id='idZenPlannerFrame' scrolling='no' height='1348px'>
+                     </iframe>`
+      }
+   }
 
+   if(!Object.keys(loc).includes(location))
+      return {
+         notFound: true
+      }
+
+   return {
+      props: {
+         title: loc[location].title,
+         schedule: loc[location].schedule
+      }
+   }
+}
 
 export default Location;
