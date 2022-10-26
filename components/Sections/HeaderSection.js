@@ -8,8 +8,8 @@ const HeaderSection = ({title, summary, btnTitle, btnHref, bgImg = '/dumbells.pn
          <Image src={bgImg} alt='' layout='fill' objectFit='cover' objectPosition='center' priority={true}/>
       </div>
 
-      <div
-         className='w-full h-full bg-[rgba(0,0,0,0.6)] flex flex-col justify-center px-[100px] absolute top-0 right-0'
+      <div className={`w-full h-full bg-[rgba(0,0,0,0.6)] flex flex-col justify-center 
+                       px-[100px] absolute top-0 right-0`}
       >
          <h1
             className={`text-4xl text-secondary font-bold relative font-medium before:absolute before:-bottom-1 
@@ -18,7 +18,7 @@ const HeaderSection = ({title, summary, btnTitle, btnHref, bgImg = '/dumbells.pn
             {title}
          </h1>
 
-         <p className='pt-2 pb-10'>
+         <p className='pt-2 pb-10 text-white'>
             {summary}
          </p>
 

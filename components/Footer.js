@@ -1,19 +1,18 @@
 import {FacebookWhite, InstagramWhite} from "./Icons";
 import ContactForm from './ContactForm'
 import Image from "next/image";
-
+import Logo  from '../public/logoWhiteBorder.png';
 
 const Footer = () => {
    return <footer className='w-full m-h-[650px] flex flex-col justify-center items-center bg-primary'>
       <div className='w-full flex flex-col md:flex-row justify-center items-center md:justify-between bg-primary'>
          <div className='w-full md:w-1/2 h-auto'>
-            <div className='w-full h-[100px] relative mt-10 md:mt-0'>
+            <div className='ml-5 mt-10 md:mt-0'>
                <Image
-                  src='/logoWhiteBorder.png'
+                  src={Logo}
                   alt='Logo'
-                  layout='fill'
-                  objectFit='contain'
-                  objectPosition='center'
+                  width={200}
+                  placeholder={'blur'}
                />
             </div>
 

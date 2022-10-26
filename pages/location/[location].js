@@ -11,7 +11,7 @@ const Location = ({title, schedule}) => {
       </div>
 
       <Trainer/>
-      <Banner />
+      <Banner />npm i next@latest react@latest react-dom@latest eslint-config-next@latest
    </div>
 }
 

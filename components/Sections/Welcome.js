@@ -26,7 +26,13 @@ const Welcome = () => {
       </div>
 
       <div className='w-[70%] float-right mr-[-150px] h-full relative'>
-         <Image src='/pt_group.jpeg' alt='Group Picture' layout='fill' objectFit='cover' objectPosition='right'/>
+         <Image
+            src='/pt_group.jpeg'
+            alt='Group Picture'
+            layout='fill'
+            objectFit='cover'
+            objectPosition='right'
+         />
       </div>
    </section>
 }
