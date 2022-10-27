@@ -1,5 +1,5 @@
-import {ContactForm, DocHead} from "../components";
-import {HeaderSection} from "../components/Sections";
+import {ContactForm, DocHead} from "../components/user";
+import {HeaderSection} from "../components/user/Sections";
 
 const Contact = () => {
     return <>
@@ -9,7 +9,7 @@ const Contact = () => {
             title='CONTACT US'
             summary={`Let's chat! Send us a message and one of our staff member will get back to you as soon as possible to 
                       answer any questions you may have.`}
-            bgImg='/typing.jpg'
+            bgImg='/img/typing.jpg'
             btnHref='/join'
             btnTitle='JOIN TODAY'
         />

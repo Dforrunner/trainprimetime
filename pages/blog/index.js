@@ -1,4 +1,4 @@
-import {DocHead} from "../../components";
+import {DocHead} from "../../components/user";
 
 const Blog = () => {
    return <>

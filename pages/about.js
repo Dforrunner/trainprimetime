@@ -1,8 +1,8 @@
-import {DocHead} from "../components";
-import Image from 'next/image';
-import {Banner, SignUp, WhyChooseUs, HeaderSection} from "../components/Sections";
+import {DocHead} from "../components/user";
+import Image from "next/image";
+import {Banner, SignUp, WhyChooseUs, HeaderSection} from "../components/user/Sections";
 
-import {CheckList} from "../components";
+import {CheckList} from "../components/user";
 
 const OurMissionSection = () => {
    return <section className='bg-white text-black flex py-20'>
@@ -62,7 +62,7 @@ const AboutUsSection = () =>
 
       <div className='w-1/2 h-full relative'>
          <Image
-            src={'/groupTraining.jpeg'}
+            src={'/img/groupTraining.jpeg'}
             alt='Training'
             layout='fill'
             objectFit='cover'

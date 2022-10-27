@@ -1,5 +1,5 @@
-import {HeaderSection} from "../../components/Sections";
-import {CheckList} from "../../components";
+import {HeaderSection} from "../../components/user/Sections";
+import {CheckList} from "../../components/user";
 
 
 const PersonalTraining = () => {

@@ -1,6 +1,6 @@
-import {DocHead} from "../components";
+import {DocHead} from "../components/user";
 import Link from 'next/link'
-import {Banner, BeforeAndAfters, ServicesSection, Testimonials, Welcome, WhyChooseUs} from "../components/Sections";
+import {Banner, BeforeAndAfters, ServicesSection, Testimonials, Welcome, WhyChooseUs} from "../components/user/Sections";
 
 const Home = ({data}) => {
 
@@ -9,7 +9,7 @@ const Home = ({data}) => {
          <DocHead title='PrimeTime Personal Training - The Best Fitness Training In St. Louis'/>
 
          <header className={`w-full h-[400px] md:h-[60vw] md:max-h-[800px] 
-                            bg-[url("/header1.png")] bg-no-repeat bg-cover bg-center`}
+                            bg-[url("/img/header1.png")] bg-no-repeat bg-cover bg-center`}
          >
             <div className='w-full h-full flex flex-col justify-center p-10 relative'>
 

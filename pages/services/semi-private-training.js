@@ -1,4 +1,4 @@
-import {HeaderSection} from "../../components/Sections";
+import {HeaderSection} from "../../components/user/Sections";
 
 const SemiPrivateTraining = () => {
    return <div>

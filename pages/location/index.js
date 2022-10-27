@@ -1,4 +1,4 @@
-import {GoogleMaps} from "../../components/Sections";
+import {GoogleMaps} from "../../components/user/Sections";
 import Link from "next/link";
 import {useRouter} from 'next/router'
 

@@ -1,5 +1,5 @@
-import {DocHead} from "../../components";
-import {ServicesSection, HeaderSection} from "../../components/Sections";
+import {DocHead} from "../../components/user";
+import {ServicesSection, HeaderSection} from "../../components/user/Sections";
 
 
 

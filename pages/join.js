@@ -1,5 +1,5 @@
-import {DocHead} from "../components";
-import Image from 'next/image';
+import {DocHead} from "../components/user";
+import Image from "next/image";
 
 const Join = () => {
    return <>
@@ -14,7 +14,7 @@ const Join = () => {
                   <div className='absolute inset-0 h-full w-full'>
                      <Image
                         alt="Pattern"
-                        src="/whiteBgPattern2.png"
+                        src="/img/whiteBgPattern2.png"
                         layout='fill'
                         objectFit='cover'
                         objectPosition='center'

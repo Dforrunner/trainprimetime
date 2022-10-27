@@ -1,4 +1,4 @@
-import {HeaderSection} from "../../components/Sections";
+import {HeaderSection} from "../../components/user/Sections";
 
 const NutritionalCoaching = () => {
    return <div>

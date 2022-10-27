@@ -1,5 +1,5 @@
-import Trainer from "../../components/Sections/Trainer";
-import {Banner} from "../../components/Sections";
+import Trainer from "../../components/user/Sections/Trainer";
+import {Banner} from "../../components/user/Sections";
 
 
 const Location = ({title, schedule}) => {
