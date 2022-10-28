@@ -13,12 +13,13 @@ import VerticalNavItems from '../components/admin/NavItems';
 import VerticalAppBarContent from '../components/admin/AppBarContent'
 
 // ** Hook Import
-import { useSettings } from '../hooks/useSettings'
+import {useSettings} from '../hooks/useSettings'
+import NextNProgress from "nextjs-progressbar";
 
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = ({children}) => {
    // ** Hooks
-   const { settings, saveSettings } = useSettings()
+   const {settings, saveSettings} = useSettings()
 
    /**
     *  The below variable will hide the current layout menu at given screen size.
@@ -32,24 +33,32 @@ const DashboardLayout = ({ children }) => {
 
 
    return (
-      <VerticalLayout
-         hidden={hidden}
-         settings={settings}
-         saveSettings={saveSettings}
-         verticalNavItems={VerticalNavItems()} // Navigation Items
-         verticalAppBarContent={(
-            props // AppBar Content
-         ) => (
-            <VerticalAppBarContent
-               hidden={hidden}
-               settings={settings}
-               saveSettings={saveSettings}
-               toggleNavVisibility={props.toggleNavVisibility}
-            />
-         )}
-      >
-         {children}
-      </VerticalLayout>
+      <>
+         <NextNProgress/>
+         <VerticalLayout
+            hidden={hidden}
+            settings={settings}
+            saveSettings={saveSettings}
+            verticalNavItems={VerticalNavItems()} // Navigation Items
+            verticalAppBarContent={(
+               props // AppBar Content
+            ) => (
+               <VerticalAppBarContent
+                  hidden={hidden}
+                  settings={settings}
+                  saveSettings={saveSettings}
+                  toggleNavVisibility={props.toggleNavVisibility}
+               />
+            )}
+         >
+            <main>
+               {children}
+               <div className='h-[80px]' />
+            </main>
+
+         </VerticalLayout>
+      </>
+
    )
 }
 
