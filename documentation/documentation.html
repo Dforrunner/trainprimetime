@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'/>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no'>
+	<link href='assets/images/favicon.png' rel='icon'/>
+	<title>Documentation | PrimeTime Training</title>
+
+	<!-- Stylesheet
+	============================== -->
+	<!-- Bootstrap -->
+	<link rel='stylesheet' type='text/css' href='assets/vendor/bootstrap/css/bootstrap.min.css'/>
+	<!-- Font Awesome Icon -->
+	<link rel='stylesheet' type='text/css' href='assets/vendor/font-awesome/css/all.min.css'/>
+	<!-- Magnific Popup -->
+	<link rel='stylesheet' type='text/css' href='assets/vendor/magnific-popup/magnific-popup.min.css'/>
+	<!-- Highlight Syntax -->
+	<link rel='stylesheet' type='text/css' href='assets/vendor/highlight.js/styles/github.css'/>
+	<!-- Custom Stylesheet -->
+	<link rel='stylesheet' type='text/css' href='assets/css/stylesheet.css'/>
+</head>
+
+<body data-spy='scroll' data-target='.idocs-navigation' data-offset='125'>
+
+<!-- Preloader -->
+<div class='preloader'>
+	<div class='lds-ellipsis'>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+</div>
+<!-- Preloader End -->
+
+<!-- Document Wrapper
+=============================== -->
+<div id='main-wrapper'>
+
+	<!-- Header
+	============================ -->
+	<header id='header' class='sticky-top'>
+		<!-- Navbar -->
+		<nav class='primary-menu navbar navbar-expand-lg navbar-dropdown-dark'>
+			<div class='container-fluid justify-content-start'>
+				<!-- Sidebar Toggler -->
+				<button id='sidebarCollapse' class='navbar-toggler d-block d-md-none' type='button'><span></span><span
+				  class='w-75'></span><span class='w-50'></span></button>
+
+				<img src='assets/images/logo.png' alt='logo' width='200' class='p-3'/>
+			</div>
+		</nav>
+		<!-- Navbar End -->
+	</header>
+	<!-- Header End -->
+
+	<!-- Content
+	============================ -->
+	<div id='content' role='main'>
+
+		<!-- Sidebar Navigation
+		============================ -->
+		<div class='idocs-navigation bg-light'>
+			<ul class='nav flex-column '>
+				<li class='nav-item'><a class='nav-link active' href='#idocs_start'>Getting Started</a>
+					<ul class='nav flex-column'>
+						<li class='nav-item'><a class='nav-link' href='#idocs_installation'>Installation</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_html_structure'>HTML Structure</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_sass'>Sass</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_color_schemes'>Color Schemes</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_theme_customization'>Customization</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_logo_settings'>Logo Settings</a></li>
+					</ul>
+				</li>
+				<li class='nav-item'><a class='nav-link' href='#idocs_layout'>Layout</a>
+					<ul class='nav flex-column'>
+						<li class='nav-item'><a class='nav-link' href='#idocs_header'>Header</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_navbar'>Navbar</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_sidebar'>Sidebar</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_footer'>Footer</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_box_layout'>Box Layout</a></li>
+					</ul>
+				</li>
+				<li class='nav-item'><a class='nav-link' href='#idocs_content'>Content</a>
+					<ul class='nav flex-column'>
+						<li class='nav-item'><a class='nav-link' href='#idocs_typography'>Typography</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_code'>Code</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_table'>Table</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_icons'>Icons</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_image'>Image</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_video'>Video</a></li>
+					</ul>
+				</li>
+				<li class='nav-item'><a class='nav-link' href='#idocs_components'>Components</a>
+					<ul class='nav flex-column'>
+						<li class='nav-item'><a class='nav-link' href='#idocs_accordion'>Accordion</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_tabs'>Tabs</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_social_icon'>Social Icon</a></li>
+						<li class='nav-item'><a class='nav-link' href='#idocs_helper_classes'>Helper Classes</a></li>
+					</ul>
+				</li>
+				<li class='nav-item'><a class='nav-link' href='#resources'>Resources</a></li>
+			</ul>
+		</div>
+
+		<!-- Docs Content
+	  ============================ -->
+		<div class='idocs-content'>
+			<div class='container'>
+
+				<!-- Getting Started
+			 ============================ -->
+				<section id='idocs_start'>
+					<h1>Documentation</h1>
+					<p class='lead'>This documentation is for PrimeTime Training website</p>
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Installation
+			 ============================ -->
+				<section id='idocs_installation'>
+					<h2>Installation</h2>
+					<p>This site was build using
+						<a href='https://nextjs.org/' target='_blank'>
+							<strong>Next.js</strong>
+						</a>.
+					   You'll need to have an understanding of how that works to be able to edit this project as you wish
+					   and the prerequisite to <strong>Next.js</strong> is <a href='https://reactjs.org/'
+					                                                          target='_blank'><strong>React</strong></a>,
+					   which you also need to know. Check the <a href='#resources'><strong>Resources</strong></a> section to
+					   learn more
+					   about the libraries used in this project and where to learn more about them.
+					</p>
+
+					<p class='lead'>Follow the steps below to setup the site for development</p>
+
+					<ol>
+						<li>
+							First make sure you have <strong>Node</strong> and <strong>npm</strong> installed. These are needed
+							to run the code
+							<ul>
+								<li>
+									To check if you have them installed open terminal and simply type the commands
+									highlighted in black and press enter
+									<ul>
+										<li><kbd>node -v</kbd> - you should see <code>v16.17.0</code> or higher</li>
+										<li><kbd>npm -v</kbd> - you should see <code>8.19.0</code> or higher</li>
+									</ul>
+								</li>
+								<li>If you get an error, don't see the expected result or your version is lower than the ones
+								    shown above, then go to the following site and download <strong>Node</strong>.
+								    Note: <strong>npm</strong> is install along with Node so you don't need to
+								    worry about that once you install Node.
+									<ul>
+										<li>
+											<a href='https://nodejs.org/en/download/' target='_blank'>Node download</a>
+											- Download <strong>Node</strong> for your operation system
+										</li>
+										<li>Run <kbd>node -v</kbd> to confirm it's downloaded - you should see
+											<code>v16.17.0</code> or higher
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Open terminal or command line and navigate to the project root directory
+
+							<ul>
+								<li>Run <kbd>npm i</kbd> to install all the dependencies</li>
+								<li>Once that's done run <kbd>npm run dev</kbd> to start the development server</li>
+								<li>Open <a href='http://localhost:3000' target='_blank'>http://localhost:3000</a> with your
+								    browser to see the result
+								</li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+
+				<hr class='divider'>
+
+				<!-- HTML Structure
+			 ============================ -->
+				<section id='idocs_html_structure'>
+					<h2>HTML Structure</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Sass
+				============================ -->
+				<section id='idocs_sass'>
+					<h2>Sass</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Color Schemes
+				============================ -->
+				<section id='idocs_color_schemes'>
+					<h2>Color Schemes</h2>
+					<p>You can change your Website's Color Scheme in an instant. We have build <strong>10 Color</strong> css
+					   file for change template primary color.</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Customization
+				============================ -->
+				<section id='idocs_theme_customization'>
+					<h2>Theme Customization</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Logo Settings
+			 ============================ -->
+				<section id='idocs_logo_settings'>
+					<h2>Logo Settings</h2>
+					<p>The Logo Container can be found in the Header Container - <code>&lt;header&gt;</code></p>
+
+				</section>
+
+
+				<hr class='divider'>
+
+				<!-- Layout
+				============================ -->
+				<section id='idocs_layout'>
+					<h2>Layout</h2>
+					<p class='lead mb-5'>Documentation and examples for header, navbar, sidebar, footer</p>
+				</section>
+
+
+				<!-- Header
+			 ============================ -->
+				<section id='idocs_header'>
+					<h2>Header</h2>
+					<p>The list of various header types & its descriptions are provided below for your reference:</p>
+
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Navbar
+				============================ -->
+				<section id='idocs_navbar'>
+					<h2>Navbar</h2>
+					<p class='lead'>Documentation and examples for powerful responsive navigation header</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Sidebar
+				============================ -->
+				<section id='idocs_sidebar'>
+					<h2>Sidebar</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Footer
+			 ============================ -->
+				<section id='idocs_footer'>
+					<h2>Footer</h2>
+					<p>The list of various footer types & its descriptions are provided below for your reference:</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Box Layout Style
+				============================ -->
+				<section id='idocs_box_layout'>
+					<h2>Box Layout Style</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Content
+				============================ -->
+				<section id='idocs_content'>
+					<h2>Content</h2>
+					<p class='lead mb-5'>Documentation and examples for displaying typography, code, table, image and video
+					                     and more..</p>
+				</section>
+
+				<!-- Typography
+				============================ -->
+				<section id='idocs_typography'>
+					<h2>Typography</h2>
+					<p class='text-4'>Documentation and examples for typography, headings, body text, lists, and more.</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Code
+				============================ -->
+				<section id='idocs_code'>
+					<h2>Code</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Table
+				============================ -->
+				<section id='idocs_table'>
+					<h2>Table</h2>
+					<p class='text-4'>Documentation and examples for opt-in styling of tables.</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Icons
+				============================ -->
+				<section id='idocs_icons'>
+					<h2>Icons</h2>
+					<p><strong>Font Awesome</strong> icon sets are used in iDocs.</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Video
+				============================ -->
+				<section id='idocs_video'>
+					<h2>Video</h2>
+					<p class='text-4'>Create responsive video embeds based on the width of the parent by creating an
+					                  intrinsic ratio that scales on any device.</p>
+
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Components
+			 ============================ -->
+				<section id='idocs_components'>
+					<h2>Components</h2>
+					<p class='mb-5'>Setting up components is very easy. Here is the Some of shortcodes describe. also,
+						<strong>iDocs</strong> is based on Bootstrap 4, so you can easily use Bootstrap's components: <a
+						  class='ml-1' target='_blank' href='https://getbootstrap.com/docs/4.4/components/'><i
+						  class='fas fa-external-link-alt'></i> Bootstrap Documentation</a></p>
+				</section>
+
+				<!-- Accordion
+				============================ -->
+				<section id='idocs_accordion'>
+					<h2>Accordion</h2>
+					<p>You can extend the default collapse behavior to create an accordion. To properly achieve the accordion
+					   style, be sure to use <code>.accordion</code> as a wrapper.</p>
+					<p>See below image and code for more information.</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Tabs
+				============================ -->
+				<section id='idocs_tabs'>
+					<h2>Tabs</h2>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Social Icon
+			 ============================ -->
+				<section id='idocs_social_icon'>
+					<h3>Social Icon</h3>
+					<p>Social links with different styles. See below code for more information.</p>
+
+				</section>
+
+				<hr class='divider'>
+
+				<!-- Helper Classes
+				============================ -->
+				<section id='idocs_helper_classes'>
+					<h3>Helper Classes</h3>
+
+				</section>
+
+
+				<hr class='divider'>
+
+				<!-- Resources	 ============================ -->
+				<section id='resources'>
+					<h2>Resources</h2>
+
+					<h4>Framework:</h4>
+					<p>These are the main frameworks required to understand and modify this app.</p>
+					<ul>
+						<li>
+							<a target='_blank' href='https://nextjs.org/docs/getting-started'>Next.js</a>
+							- the framework used to build this app.
+							<a target='_blank' href='https://nextjs.org/learn/basics/create-nextjs-app'>
+								Learn more...
+							</a>
+						</li>
+						<li>
+							<a target='_blank' href='https://reactjs.org/'>React</a>
+							- the library used to build the UI. This is the prerequisite to Next.js because Next.js is a React
+							Framework
+						</li>
+					</ul>
+
+					<h4>Libraries used:</h4>
+					<ul>
+						<li>
+							<a target='_blank' href='https://mui.com/material-ui/getting-started/overview/'>Material UI</a>
+							- React component library used to build most of the dashboard
+						</li>
+						<li>
+							<a target='_blank' href='https://tailwindcss.com/docs/installation'>TailWindCss</a>
+							- CSS framework used for rapid styling of components. Basically provides ready to use CSS classes
+						</li>
+						<li>
+							<a target='_blank' href='https://www.prisma.io/docs/'>Prisma</a>
+							- ORM used in this project
+						</li>
+					</ul>
+
+					<h4>Database:</h4>
+					<ul>
+						<li>
+							<a target='_blank' href='https://www.postgresql.org/'>PostgresSQL</a>
+							- the database used to store data.
+						</li>
+					</ul>
+				</section>
+
+			</div>
+		</div>
+
+	</div>
+	<!-- Content end -->
+
+
+</div>
+<!-- Document Wrapper end -->
+
+<!-- Back To Top -->
+<a id='back-to-top' data-toggle='tooltip' title='Back to Top' href='javascript:void(0)'><i class='fa fa-chevron-up'></i></a>
+
+<!-- JavaScript
+============================ -->
+<script src='assets/vendor/jquery/jquery.min.js'></script>
+<script src='assets/vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
+<!-- Highlight JS -->
+<script src='assets/vendor/highlight.js/highlight.min.js'></script>
+<!-- Easing -->
+<script src='assets/vendor/jquery.easing/jquery.easing.min.js'></script>
+<!-- Magnific Popup -->
+<script src='assets/vendor/magnific-popup/jquery.magnific-popup.min.js'></script>
+<!-- Custom Script -->
+<script src='assets/js/theme.js'></script>
+</body>
+</html>
