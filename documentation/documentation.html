@@ -92,6 +92,10 @@
 						<li class='nav-item'><a class='nav-link' href='#idocs_video'>Video</a></li>
 					</ul>
 				</li>
+
+				<li class='nav-item'>
+					<a class='nav-link' href='#database'>Database</a>
+				</li>
 				<li class='nav-item'><a class='nav-link' href='#idocs_components'>Components</a>
 					<ul class='nav flex-column'>
 						<li class='nav-item'><a class='nav-link' href='#idocs_accordion'>Accordion</a></li>
@@ -293,6 +297,59 @@
 					<h2>Content</h2>
 					<p class='lead mb-5'>Documentation and examples for displaying typography, code, table, image and video
 					                     and more..</p>
+				</section>
+
+				<!-- Database
+				============================ -->
+				<section id='database'>
+					<h2>Database</h2>
+					<p class='lead mb-5'>Documentation for database used, access and manipulation</p>
+
+					<p>
+						The database used in this app is <a target='_blank' href='https://www.postgresql.org/'><strong>PostgresSQL</strong></a>.
+						You can read more about it on their website. However, it's not really necessary since an ORM is used
+						to connect and manipulate data in the database. The ORM used in this project is
+						<a target='_blank' href='https://www.prisma.io/docs/'><strong>Prisma</strong></a>.
+					</p>
+					<ul>
+						<li>
+							Prisma offers a nice user interface to view and edit database in your browser called the Prisma
+							Studio.
+							<ul>
+								<li>
+									To open Prisma Studio run the following commend in the terminal. Note: You'll need to be in
+									the project directory to run these commands.
+									<ul>
+										<li>
+											<kbd>prima studio</kbd> or <kbd>npx prima studio</kbd>
+										</li>
+										<li>
+											Go to
+											<a href='http://localhost:5555' target='_blank'>http://localhost:5555</a>
+											to view the Prisma Studio
+										</li>
+									</ul>
+								</li>
+
+							</ul>
+						</li>
+						<li>
+							Prisma offers database connections to varies different database options.
+							<a href='https://www.prisma.io/docs/concepts/database-connectors/postgresql' target='_blank'>
+								Read more about that here.
+							</a>
+
+							<ul>
+								<li>
+									To connect to a different database change the <code>DATABASE_URL</code> variable in the
+									<code>/.env</code> file located in the project root directory.
+								</li>
+							</ul>
+						<li>
+							Database schema is located in at <code>/prima/schema.prisma</code>
+						</li>
+						</li>
+					</ul>
 				</section>
 
 				<!-- Typography
