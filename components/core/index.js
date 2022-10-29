@@ -1,5 +1,4 @@
-import Editor from './Editor';
-
+import Editor from './Blog/Editor';
 
 export {
    Editor

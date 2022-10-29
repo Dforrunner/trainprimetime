@@ -2,6 +2,11 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 //
 //Push changed with: npx prisma db push
+//
+//MIGRATIONS: https://www.prisma.io/docs/concepts/components/prisma-migrate/get-started
+//
+//First migration: $ prisma migrate dev --name init
+//Second migration: $ prisma migrate dev --name added_job_title
 
 generator client {
   provider = "prisma-client-js"
@@ -30,3 +35,16 @@ model Services {
     name                String
     summery             String      @db.Text
 }
+
+model Blogs {
+    id                  Int         @id @default(autoincrement())
+    title               String
+    slug                String      @unique
+    date                DateTime    @default(now())  @db.Date
+    excerpt             String?     @db.Text
+    author              String?
+    content             String?     @db.Text
+    userId              Int?
+    publish             Boolean?    @default(false)
+}
+

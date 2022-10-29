@@ -51,7 +51,7 @@ const DashboardLayout = ({children}) => {
                />
             )}
          >
-            <main>
+            <main className='relative'>
                {children}
                <div className='h-[80px]' />
             </main>
