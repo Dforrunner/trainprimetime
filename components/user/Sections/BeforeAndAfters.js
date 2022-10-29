@@ -51,7 +51,7 @@ const BeforeAndAfters = ({imageList = list}) => {
    return <section className='w-full m-h-[650px] bg-primary p-10 pb-20'>
       <div className='text-center w-full py-10'>
          <h1 className='text-secondary text-lg'>BEFORE & AFTER</h1>
-         <h2 className='text-2xl'>SEE OUR MEMBER RESULTS</h2>
+         <h2 className='text-2xl text-white'>SEE OUR MEMBER RESULTS</h2>
       </div>
 
       <Slider {...settings}>

@@ -9,7 +9,7 @@ const HeaderSection = ({title, summary, btnTitle, btnHref, bgImg = '/img/dumbell
       </div>
 
       <div className={`w-full h-full bg-[rgba(0,0,0,0.6)] flex flex-col justify-center 
-                       px-[100px] absolute top-0 right-0`}
+                       px-[100px] absolute top-0 right-0 text-white`}
       >
          <h1
             className={`text-4xl text-secondary font-bold relative font-medium before:absolute before:-bottom-1 

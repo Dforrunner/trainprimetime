@@ -101,14 +101,8 @@ const Blog = ({handleSubmit, setContent, slugError}) => {
    </form>
 }
 
-const BlogPost = () => {
-   const [open, setOpen] = useState(false);
-   const [publish, setPublish] = useState(false);
-   const [content, setContent] = useState('');
-   const [slugError, setSlugError] = useState('');
-   const [saved, setSaved] = useState(false);
-   const [initialSave, setInitialSave] = useState(true);
-   const [postID, setPostID] = useState(null);
+const BlogDrawer = ({handleSubmit, setContent, slugError, saved, handleSave, handlePublish, open, setOpen}) => {
+
 
    const handleOpen = () =>
       setOpen(true);
@@ -116,6 +110,72 @@ const BlogPost = () => {
 
    const handleClose = () =>
       setOpen(false);
+
+   return <Drawer
+      anchor={'right'}
+      open={open}
+      onClose={() => setOpen(false)}
+   >
+      <AppBar sx={{position: 'sticky', top: 0, padding: '0 10px 0 10px'}}>
+         <Toolbar>
+            <IconButton
+               edge='start'
+               color='inherit'
+               onClick={handleClose}
+               aria-label='close'
+            >
+               <CloseIcon/>
+            </IconButton>
+            <Typography sx={{ml: 2, flex: 1, color: 'white'}} variant='h6' component='div'>
+               Create a new blog post
+            </Typography>
+            <Button
+               color='secondary'
+               variant='contained'
+               onClick={handleSave}
+               startIcon={saved ? <DownloadDoneIcon /> : <SaveIcon/>}
+               type={'submit'}
+               form={'blogPostForm'}
+               sx={{
+                  marginRight: 2
+               }}
+            >
+               Save
+            </Button>
+
+            <Button
+               color='success'
+               variant='contained'
+               onClick={handlePublish}
+               startIcon={<UploadIcon/>}
+               type={'submit'}
+               form={'blogPostForm'}
+            >
+               Publish
+            </Button>
+         </Toolbar>
+      </AppBar>
+
+      <div className='w-full md:w-[80vw]'>
+         <Blog
+            handleSubmit={handleSubmit}
+            setContent={setContent}
+            slugError={slugError}
+         />
+      </div>
+   </Drawer>
+}
+
+const BlogPost = () => {
+   const [openBlogDrawer, setOpenBlogDrawer] = useState(false);
+   const [publish, setPublish] = useState(false);
+   const [content, setContent] = useState('');
+   const [slugError, setSlugError] = useState('');
+   const [saved, setSaved] = useState(false);
+   const [initialSave, setInitialSave] = useState(true);
+   const [postID, setPostID] = useState(null);
+
+
 
    const handlePublish = () =>
       setPublish(true)
@@ -130,7 +190,6 @@ const BlogPost = () => {
          setPostID(res.data.id)
 
       setInitialSave(false);
-      console.log({postID, initialSave})
       setPublish(false)
       setSaved(true);
 
@@ -174,66 +233,21 @@ const BlogPost = () => {
 
       //If Publish button is clicked then the drawer can be closed once the data has been saved to the DB and published
       if(publish)
-         setOpen(false);
+         setOpenBlogDrawer(false);
    }
 
    return <>
-      <Button onClick={handleOpen} variant='contained'>Create New Blog</Button>
-      <Drawer
-         anchor={'right'}
-         open={open}
-         onClose={() => setOpen(false)}
-      >
-         <AppBar sx={{position: 'sticky', top: 0, padding: '0 10px 0 10px'}}>
-            <Toolbar>
-               <IconButton
-                  edge='start'
-                  color='inherit'
-                  onClick={handleClose}
-                  aria-label='close'
-               >
-                  <CloseIcon/>
-               </IconButton>
-               <Typography sx={{ml: 2, flex: 1, color: 'white'}} variant='h6' component='div'>
-                  Create a new blog post
-               </Typography>
-               <Button
-                  color='secondary'
-                  variant='contained'
-                  onClick={handleSave}
-                  startIcon={saved ? <DownloadDoneIcon /> : <SaveIcon/>}
-                  type={'submit'}
-                  form={'blogPostForm'}
-                  sx={{
-                     marginRight: 2
-                  }}
-               >
-                  Save
-               </Button>
-
-               <Button
-                  color='success'
-                  variant='contained'
-                  onClick={handlePublish}
-                  startIcon={<UploadIcon/>}
-                  type={'submit'}
-                  form={'blogPostForm'}
-               >
-                  Publish
-               </Button>
-            </Toolbar>
-         </AppBar>
-
-         <div className='w-full md:w-[80vw] relative'>
-            <Blog
-               handleSubmit={handleSubmit}
-               setContent={setContent}
-               slugError={slugError}
-            />
-         </div>
-
-
-      </Drawer>
+      <Button onClick={() => setOpenBlogDrawer(true)} variant='contained'>Create New Blog</Button>
+      <BlogDrawer
+         handleSubmit={handleSubmit}
+         setContent={setContent}
+         slugError={slugError}
+         saved={saved}
+         handleSave={handleSave}
+         handlePublish={handlePublish}
+         open={openBlogDrawer}
+         setOpen={setOpenBlogDrawer}
+      />
    </>
 }
 export default BlogPost;

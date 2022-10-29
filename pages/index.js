@@ -19,7 +19,7 @@ const Home = ({data}) => {
                />
 
                <h1 className={`animate slideInLeft text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl 
-                               drop-shadow-[0_0_5px_black] md:drop-shadow-none`}>
+                               drop-shadow-[0_0_5px_black] md:drop-shadow-none text-white`}>
                   LOOK FORWARD TO
                   <span className={`text-5xl md:text-6xl xl:text-7xl 2xl:text-8xl md:text-primary 
                                     block py-1 md:py-3 font-medium`}>

@@ -1,11 +1,7 @@
 import prisma from "../../prisma";
 import dayjs from "dayjs";
 
-export default async (req, res) => {
-   //Confirm request type is POST
-   if (req.method !== 'POST')
-      return res.status(405).json({message: 'Method not allowed'})
-
+const POST = async (req, res) => {
    const {initialSave, id, blogData} = JSON.parse(req.body)
    //format date for DB
    blogData.date = dayjs(blogData.date).format()
@@ -39,4 +35,35 @@ export default async (req, res) => {
 
    //Return response to client
    res.status(200).json({status: 'success', data: saveBlog})
+}
+
+const GET = async (req, res) => {
+   const blogs = await prisma.blogs.findMany()
+
+   res.status(200).json({status: 'success', data: blogs})
+}
+
+const PUT = async (req, res) => {
+   const {id, blogData} = JSON.parse(req.body)
+
+   if(!id)
+      return res.status(409).json({status: 'error', message: 'Missing `id` property'})
+
+   const update = await prisma.blogs.update({
+      where: { id },
+      data: blogData
+   })
+
+   res.status(200).json({status: 'success', data: update})
+}
+
+export default async (req, res) => {
+   //Confirm request type is POST
+   if (req.method === 'POST')
+      return POST(req, res)
+   if (req.method === 'GET')
+      return GET(req, res)
+   if (req.method === 'PUT')
+      return PUT(req, res)
+   res.status(405).json({message: 'Method not allowed'})
 }

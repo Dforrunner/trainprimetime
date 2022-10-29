@@ -15,7 +15,7 @@ const WhyChooseUs = () => {
    return <section className='w-full min-h-[480px] bg-primary'>
       <div className='text-center w-full pt-[60px]'>
          <h1 className='text-secondary text-lg'>WHY CHOOSE US?</h1>
-         <h2 className='text-2xl'>PUSH YOUR LIMITS FORWARD</h2>
+         <h2 className='text-2xl text-white'>PUSH YOUR LIMITS FORWARD</h2>
       </div>
 
       <div className='w-full h-full flex flex-row flex-wrap lg:px-20 justify-center py-5'>
