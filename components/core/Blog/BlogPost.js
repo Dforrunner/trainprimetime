@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {Editor} from '../../../components/core';
+import {useState} from 'react';
+import {Editor, TagAdder} from '../../../components/core';
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import Drawer from '@mui/material/Drawer';
@@ -14,6 +14,7 @@ import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import UploadIcon from '@mui/icons-material/Upload';
+import Checkbox from '@mui/material/Checkbox';
 
 
 const CustomInput = (props) =>
@@ -33,14 +34,24 @@ const saveBlog = async (blog) => {
 
 }
 
-const Blog = ({handleSubmit, setContent, slugError}) => {
+const Blog = ({handleSubmit, setContent, slugError, handleKeyPress=()=>{} }) => {
    const [value, setValue] = useState(dayjs());
+   const [schedulePublication, setSchedulePublication] = useState(false);
+   const [tags, setTags] = useState([]);
 
    const handleChange = (newValue) => {
       setValue(newValue);
    };
 
-   return <form id={'blogPostForm'} onSubmit={handleSubmit}>
+   const handleSchedule = (event) => {
+      setSchedulePublication(event.target.checked);
+   };
+
+   const onSubmit = e =>
+      handleSubmit(e, tags)
+
+
+   return <form id={'blogPostForm'} onSubmit={onSubmit} onKeyPress={handleKeyPress}>
       <Card className='py-5 px-10 my-5 w-full space-y-5'>
          <CustomInput
             required
@@ -48,32 +59,19 @@ const Blog = ({handleSubmit, setContent, slugError}) => {
             name='title'
             helperText='Name your blog post!'
          />
+
          <CustomInput
             required
-            error={slugError}
+            error={slugError.status === 'error'}
             label='Slug'
             name='slug'
             helperText={
-               slugError
+               slugError.status === 'error'
                   ? slugError.message
                   : 'Select a slug for this blog post, such as post-1, post-2, etc. NOTE: must be unique'
             }
          />
-         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-               label='Date desktop'
-               inputFormat='MM/DD/YYYY'
-               value={value}
-               onChange={handleChange}
-               renderInput={(params) => <CustomInput
-                  required
-                  label='Date'
-                  name='date'
-                  helperText='What is the published date you would like to show for this post?'
-                  {...params}
-               />}
-            />
-         </LocalizationProvider>
+
          <CustomInput
             label='Excerpt'
             name='excerpt'
@@ -88,7 +86,52 @@ const Blog = ({handleSubmit, setContent, slugError}) => {
             helperText='Who should be credited for this post?'
          />
 
+         <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+               label='Article Date'
+               inputFormat='MM/DD/YYYY'
+               value={value}
+               onChange={handleChange}
+               renderInput={(params) => <CustomInput
+                  required
+                  label='Date'
+                  name='date'
+                  helperText='What is the published date you would like to show for this post?'
+                  {...params}
+               />}
+            />
 
+            <div className='border-[1px] border-[rgba(0,0,0,0.2)] rounded p-3'>
+
+               <div className='flex items-center '>
+                  <Checkbox checked={schedulePublication} onChange={handleSchedule}/>
+                  Schedule to publish on a future date
+               </div>
+
+               {schedulePublication &&
+                  <div className='mt-4'>
+                     <DesktopDatePicker
+                        label='Schedule Publish Date'
+                        inputFormat='MM/DD/YYYY'
+                        value={value}
+                        onChange={handleChange}
+                        renderInput={(params) => <CustomInput
+                           required
+                           label='Date'
+                           name='publishDate'
+                           helperText='When do you want this post to be published?'
+                           {...params}
+                        />}
+                     />
+                  </div>
+               }
+            </div>
+
+
+
+         </LocalizationProvider>
+
+         <TagAdder onChange={tags => setTags(tags)}/>
       </Card>
       <Card className='py-5 px-10'>
          <div className='pb-5'>
@@ -101,8 +144,7 @@ const Blog = ({handleSubmit, setContent, slugError}) => {
    </form>
 }
 
-const BlogDrawer = ({handleSubmit, setContent, slugError, saved, handleSave, handlePublish, open, setOpen}) => {
-
+const BlogDrawer = ({handleSubmit, setContent, slugError, saved, handleSave, handlePublish, handleKeyPress, open, setOpen}) => {
 
    const handleOpen = () =>
       setOpen(true);
@@ -161,6 +203,7 @@ const BlogDrawer = ({handleSubmit, setContent, slugError, saved, handleSave, han
             handleSubmit={handleSubmit}
             setContent={setContent}
             slugError={slugError}
+            handleKeyPress={handleKeyPress}
          />
       </div>
    </Drawer>
@@ -176,6 +219,9 @@ const BlogPost = () => {
    const [postID, setPostID] = useState(null);
 
 
+   const handleKeyPress = () => {
+      setSaved(false)
+   }
 
    const handlePublish = () =>
       setPublish(true)
@@ -192,14 +238,9 @@ const BlogPost = () => {
       setInitialSave(false);
       setPublish(false)
       setSaved(true);
-
-      const timer = setTimeout(() =>{
-         setSaved(false);
-         clearTimeout(timer);
-      }, 2000)
    }
 
-   const handleSubmit = async (e) => {
+   const handleSubmit = async (e, tags) => {
       e.preventDefault();
 
       const getVal = (name) => e.target.elements[name].value
@@ -213,6 +254,7 @@ const BlogPost = () => {
             date: getVal('date'),
             excerpt: getVal('excerpt'),
             author: getVal('author'),
+            tags,
             content,
             publish,
          }
@@ -247,6 +289,7 @@ const BlogPost = () => {
          handlePublish={handlePublish}
          open={openBlogDrawer}
          setOpen={setOpenBlogDrawer}
+         handleKeyPress={handleKeyPress}
       />
    </>
 }

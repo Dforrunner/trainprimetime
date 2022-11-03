@@ -15,6 +15,10 @@ module.exports = {
       transitionDuration: {
         '200': '200ms',
         '2000': '2000ms',
+      },
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
       }
     },
     colors: {

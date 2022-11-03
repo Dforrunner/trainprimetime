@@ -43,6 +43,18 @@ const DefaultPalette = (mode, themeColor) => {
       dark: '#777B82',
       contrastText: '#FFF'
     },
+    third: {
+      light: '#282324',
+      main: '#1e191a',
+      dark: '#181415',
+      contrastText: '#FFF'
+    },
+    fourth: {
+      light: '#fc635c',
+      main: '#e84039',
+      dark: '#e73128',
+      contrastText: '#FFF'
+    },
     success: {
       light: '#6AD01F',
       main: '#56CA00',

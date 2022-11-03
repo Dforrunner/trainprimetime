@@ -48,7 +48,7 @@ const Dialog = theme => {
               color: theme.palette.primary.contrastText
             },
             '& span.MuiTypography-overline': {
-              fontSize: '1rem',
+              fontSize: '0.8rem',
               lineHeight: '24px',
               letterSpacing: '0.15px'
             },

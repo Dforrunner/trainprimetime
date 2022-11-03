@@ -36,6 +36,36 @@ model Services {
     summery             String      @db.Text
 }
 
+model Tag {
+     id                    Int                 @id @default(autoincrement())
+     name                  String
+     blog                  TagsOnBlogs[]
+}
+
+model TagsOnBlogs {
+    blog                  Blogs     @relation(fields: [blogId], references: [id])
+    blogId                Int // relation scalar field (used in the `@relation` attribute above)
+    tag                   Tag @relation(fields: [tagId], references: [id])
+    tagId                 Int // relation scalar field (used in the `@relation` attribute above)
+
+    @@id([blogId, tagId])
+}
+
+model Category {
+  id                    Int                 @id @default(autoincrement())
+  name                  String
+  blogs                 CategoriesOnBlogs[]
+}
+
+model CategoriesOnBlogs {
+  blog                  Blogs     @relation(fields: [blogId], references: [id])
+  blogId                Int // relation scalar field (used in the `@relation` attribute above)
+  category              Category @relation(fields: [categoryId], references: [id])
+  categoryId            Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([blogId, categoryId])
+}
+
 model Blogs {
     id                  Int         @id @default(autoincrement())
     title               String
@@ -46,5 +76,11 @@ model Blogs {
     content             String?     @db.Text
     userId              Int?
     publish             Boolean?    @default(false)
+    isScheduled         Boolean?    @default(false)
+    publishDate         DateTime?   @default(now())
+    imgSrc              String?
+    createdOn           DateTime    @default(now())
+    categories          CategoriesOnBlogs[]
+    tags                TagsOnBlogs[]
 }
 

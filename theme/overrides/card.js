@@ -25,7 +25,7 @@ const Card = theme => {
         title: {
           lineHeight: 1,
           fontWeight: 500,
-          fontSize: '1.25rem',
+          fontSize: '1rem',
           letterSpacing: '0.0125em'
         },
         action: {
