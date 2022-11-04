@@ -1,28 +1,9 @@
-import {Cancel} from "@mui/icons-material";
-import {Stack, TextField} from "@mui/material";
-import {Box} from "@mui/system";
+import {TextField} from "@mui/material";
 import {useState} from "react";
 import AddIcon from '@mui/icons-material/Add';
+import RemovablePill from './RemovablePill';
 
-const Tags = ({data, handleDelete}) => {
-   return (
-      <Box className='rounded py-1 px-3 border-[1px] border-third text-third min-w-[50px]'>
-         <Stack direction='row' gap={1} className='group relative w-full'>
-            <span className='text-center w-full'>{data}</span>
-            <span className='hidden group-hover:inline absolute left-0 top-0 bg-white w-full text-center cursor-pointer'
-                  onClick={() => {
-                     handleDelete(data);
-                  }}
-            >
-               <Cancel color='third'/>
-            </span>
-
-         </Stack>
-      </Box>
-   );
-};
-
-const TagAdder = ({onChange = () => {}}) => {
+const TagAdder = ({existingTags, onChange = () => {}}) => {
    const [tags, setTags] = useState([]);
    const [value, setValue] = useState('');
 
@@ -54,9 +35,10 @@ const TagAdder = ({onChange = () => {}}) => {
    return (
       <div className='border-[1px] border-[rgba(0,0,0,0.2)] rounded p-3'>
          <div className='my-3 flex flex-wrap gap-1'>
+
             {tags.length
                ? tags.map((data, index) =>
-                  <Tags data={data} handleDelete={handleDelete} key={index}/>
+                  <RemovablePill text={data} handleDelete={handleDelete} key={index}/>
                )
                : 'Add Tags'
             }
@@ -73,8 +55,6 @@ const TagAdder = ({onChange = () => {}}) => {
                startAdornment: <span className='text-third mr-3 cursor-pointer' onClick={handleAdd}><AddIcon /></span>,
             }}
          />
-
-
       </div>
    );
 }

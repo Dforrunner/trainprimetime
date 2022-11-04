@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {BlogCard, BlogPost} from "../../../../components/core/Blog";
 import prisma from "../../../../prisma";
-import dayjs from "dayjs";
 import {v4 as uuidv4} from "uuid";
 import Pagination from '@mui/material/Pagination';
 

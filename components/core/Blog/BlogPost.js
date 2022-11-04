@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {Editor, TagAdder} from '../../../components/core';
+import {useState, useEffect} from 'react';
+import {CategorySelector, Editor, TagAdder} from '../../../components/core';
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import Drawer from '@mui/material/Drawer';
@@ -16,7 +16,6 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import UploadIcon from '@mui/icons-material/Upload';
 import Checkbox from '@mui/material/Checkbox';
 
-
 const CustomInput = (props) =>
    <TextField
       {...props}
@@ -25,19 +24,27 @@ const CustomInput = (props) =>
    />
 
 const saveBlog = async (blog) => {
-   const response = await fetch('/api/blogs', {
+   const response = await fetch('/api/blog/create', {
       method: 'POST',
       body: JSON.stringify(blog)
    })
 
    return await response.json();
-
 }
 
-const Blog = ({handleSubmit, setContent, slugError, handleKeyPress=()=>{} }) => {
+const Blog = ({
+                 handleSubmit,
+                 setContent,
+                 slugError,
+                 handleKeyPress=()=>{}
+}) => {
+
    const [value, setValue] = useState(dayjs());
    const [schedulePublication, setSchedulePublication] = useState(false);
-   const [tags, setTags] = useState([]);
+   const [selectedTags, setSelectedTags] = useState([]);
+   const [selectedCategories, setSelectedCategories] = useState([]);
+   const [existingTags, setExistingTags] = useState([]);
+   const [existingCategories, setExistingCategories] = useState([]);
 
    const handleChange = (newValue) => {
       setValue(newValue);
@@ -47,9 +54,27 @@ const Blog = ({handleSubmit, setContent, slugError, handleKeyPress=()=>{} }) => 
       setSchedulePublication(event.target.checked);
    };
 
-   const onSubmit = e =>
-      handleSubmit(e, tags)
+   const handleCategories = (data) =>
+      setSelectedCategories(data)
 
+   const onSubmit = e =>
+      handleSubmit(e, {tags: selectedTags, categories: selectedCategories})
+
+
+   useEffect(() => {
+    fetch('/api/blog/get/filters')
+       .then(res => res.json())
+       .then(res => {
+          const {status, data, message} = res;
+
+          if(status === 'error')
+             return console.error(message);
+
+          setExistingCategories(data.categories);
+          setExistingTags(data.tags);
+       })
+       .catch(console.error)
+   }, [])
 
    return <form id={'blogPostForm'} onSubmit={onSubmit} onKeyPress={handleKeyPress}>
       <Card className='py-5 px-10 my-5 w-full space-y-5'>
@@ -126,12 +151,17 @@ const Blog = ({handleSubmit, setContent, slugError, handleKeyPress=()=>{} }) => 
                   </div>
                }
             </div>
-
-
-
          </LocalizationProvider>
 
-         <TagAdder onChange={tags => setTags(tags)}/>
+         <TagAdder
+            existingTags={existingTags}
+            onChange={tags => setSelectedTags(tags)}
+         />
+
+         <CategorySelector
+            categories={existingCategories}
+            onChange={handleCategories}
+         />
       </Card>
       <Card className='py-5 px-10'>
          <div className='pb-5'>
@@ -144,11 +174,17 @@ const Blog = ({handleSubmit, setContent, slugError, handleKeyPress=()=>{} }) => 
    </form>
 }
 
-const BlogDrawer = ({handleSubmit, setContent, slugError, saved, handleSave, handlePublish, handleKeyPress, open, setOpen}) => {
-
-   const handleOpen = () =>
-      setOpen(true);
-
+const BlogDrawer = ({
+                       handleSubmit,
+                       setContent,
+                       slugError,
+                       saved,
+                       handleSave,
+                       handlePublish,
+                       handleKeyPress,
+                       open,
+                       setOpen
+}) => {
 
    const handleClose = () =>
       setOpen(false);
@@ -198,7 +234,7 @@ const BlogDrawer = ({handleSubmit, setContent, slugError, saved, handleSave, han
          </Toolbar>
       </AppBar>
 
-      <div className='w-full md:w-[80vw]'>
+      <div className='w-full'>
          <Blog
             handleSubmit={handleSubmit}
             setContent={setContent}
@@ -217,7 +253,6 @@ const BlogPost = () => {
    const [saved, setSaved] = useState(false);
    const [initialSave, setInitialSave] = useState(true);
    const [postID, setPostID] = useState(null);
-
 
    const handleKeyPress = () => {
       setSaved(false)
@@ -240,7 +275,7 @@ const BlogPost = () => {
       setSaved(true);
    }
 
-   const handleSubmit = async (e, tags) => {
+   const handleSubmit = async (e, arrayData) => {
       e.preventDefault();
 
       const getVal = (name) => e.target.elements[name].value
@@ -254,12 +289,15 @@ const BlogPost = () => {
             date: getVal('date'),
             excerpt: getVal('excerpt'),
             author: getVal('author'),
-            tags,
+            ...arrayData,
             content,
             publish,
          }
       }
 
+
+      console.log(data)
+      return
       //Saving the data
       const res = await saveBlog(data)
 
@@ -294,12 +332,3 @@ const BlogPost = () => {
    </>
 }
 export default BlogPost;
-
-
-export const getServerSideProps = async (ctx) => {
-   return {
-      props: {
-         typeLayout: 'dashboard',
-      },
-   };
-};

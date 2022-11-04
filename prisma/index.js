@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient, Prisma } = require('@prisma/client');
 const dayjs = require('dayjs');
 
 const prisma =  new PrismaClient();
@@ -29,3 +29,10 @@ prisma.$use(async (params, next) => {
 })
 
 export default prisma;
+
+
+export const ErrorHandler = (err, res) => {
+   if (err instanceof Prisma.PrismaClientKnownRequestError)
+      if(err.code === 'P2002')
+         res.status(409).json({status: 'error', message: 'Value already exists. They must be unique'})
+}
