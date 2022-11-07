@@ -1,42 +1,62 @@
 import prisma from "../../../prisma";
 import dayjs from "dayjs";
+import {ValidateBlogPost} from "../../../utils/dataValidation";
 
 export default async (req, res) => {
    //Confirm request type
    if (req.method !== 'POST')
       return res.status(405).json({status: 'error', message: 'Method not allowed'})
 
-   const {initialSave, id, blogData} = JSON.parse(req.body)
-   //format date for DB
-   blogData.date = dayjs(blogData.date).format()
+   const data = JSON.parse(req.body)
+   const validate = ValidateBlogPost(data) //Validate post data schema
 
-   //If the post data contains the post id then that means the user has already saved the data once, and they
-   //trying to save it again, in which case we need to update the data rather than creating a new entry
-   if(!initialSave && id){
-      const update = await prisma.post.update({
-         where: { id },
-         data: blogData
-      })
-
-      return res.status(200).json({status: 'saved', data: update})
-   }
+   if(validate.error)
+      return res.status(409).json({status: 'error', message: validate.error})
 
    //Check to see if the slug exists
-   const slugConflict = await prisma.post.findFirst({
+   const slugConflict = await prisma.post.findMany({
       where: {
-         slug: blogData.slug
+         slug: data.slug
       }
    })
 
    //If it exists, then return an error to the client
-   if(slugConflict)
+   if(slugConflict.length)
       return res.status(409).json({status: 'error', field: 'slug', message: 'Slug already exists and they must be unique'})
 
-   //Insert the date into the DB
-   const saveBlog = await prisma.post.create({
-      data: blogData
-   })
+   try {
+      //Insert the date into the DB
+      const saveBlog = await prisma.post.create({
+         data: {
+            ...data,
+            date: dayjs(data.date).format(),
+            tags: [...data.tags.newTags, ...data.tags.existingTags],
+            categories: data.categories
+         }
+      })
 
-   //Return response to client
-   res.status(200).json({status: 'success', data: saveBlog})
+      //Return response to client
+      res.status(200).json({status: 'success', data: saveBlog})
+
+   } catch (e){
+      console.error(e)
+
+      //Return response to client
+      res.status(409).json({status: 'error', message: 'Improper data'})
+   } finally {
+
+      //Add new tags to the DB
+      const tags = data.tags.newTags.map(i => ({name: i}))
+
+      await prisma.$transaction(
+         tags.map(tag =>
+            prisma.tag.upsert({
+               where: tag,
+               update: tag,
+               create: tag,
+            })
+         )
+      );
+   }
+
 }

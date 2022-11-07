@@ -5,7 +5,11 @@ export default async (req, res) => {
    if (req.method !== 'GET')
       return res.status(405).json({status: 'error', message: 'Method not allowed'})
 
+   //Get all category names
    const data = await prisma.category.findMany()
 
-   res.status(200).json({status: 'success', data})
+   //Convert object into array of category names only
+   const names = data.map(i => i.name)
+
+   res.status(200).json({status: 'success', data: names})
 }

@@ -7,9 +7,7 @@ import {Card, TextField, Typography} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import SaveIcon from '@mui/icons-material/Save';
-import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+import IconButton from '@mui/material/IconButton'
 import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
@@ -36,8 +34,8 @@ const Blog = ({
                  handleSubmit,
                  setContent,
                  slugError,
-                 handleKeyPress=()=>{}
-}) => {
+                 setSlugError
+              }) => {
 
    const [value, setValue] = useState(dayjs());
    const [schedulePublication, setSchedulePublication] = useState(false);
@@ -62,21 +60,21 @@ const Blog = ({
 
 
    useEffect(() => {
-    fetch('/api/blog/get/filters')
-       .then(res => res.json())
-       .then(res => {
-          const {status, data, message} = res;
+      fetch('/api/blog/get/filters')
+         .then(res => res.json())
+         .then(res => {
+            const {status, data, message} = res;
 
-          if(status === 'error')
-             return console.error(message);
+            if (status === 'error')
+               return console.error(message);
 
-          setExistingCategories(data.categories);
-          setExistingTags(data.tags);
-       })
-       .catch(console.error)
+            setExistingCategories(data.categories);
+            setExistingTags(data.tags);
+         })
+         .catch(console.error)
    }, [])
 
-   return <form id={'blogPostForm'} onSubmit={onSubmit} onKeyPress={handleKeyPress}>
+   return <form id={'blogPostForm'} onSubmit={onSubmit}>
       <Card className='py-5 px-10 my-5 w-full space-y-5'>
          <CustomInput
             required
@@ -95,6 +93,7 @@ const Blog = ({
                   ? slugError.message
                   : 'Select a slug for this blog post, such as post-1, post-2, etc. NOTE: must be unique'
             }
+            onKeyPress={() => setSlugError('')}
          />
 
          <CustomInput
@@ -134,21 +133,21 @@ const Blog = ({
                </div>
 
                {schedulePublication &&
-                  <div className='mt-4'>
-                     <DesktopDatePicker
-                        label='Schedule Publish Date'
-                        inputFormat='MM/DD/YYYY'
-                        value={value}
-                        onChange={handleChange}
-                        renderInput={(params) => <CustomInput
-                           required
-                           label='Date'
-                           name='publishDate'
-                           helperText='When do you want this post to be published?'
-                           {...params}
-                        />}
-                     />
-                  </div>
+               <div className='mt-4'>
+                  <DesktopDatePicker
+                     label='Schedule Publish Date'
+                     inputFormat='MM/DD/YYYY'
+                     value={value}
+                     onChange={handleChange}
+                     renderInput={(params) => <CustomInput
+                        required
+                        label='Date'
+                        name='publishDate'
+                        helperText='When do you want this post to be published?'
+                        {...params}
+                     />}
+                  />
+               </div>
                }
             </div>
          </LocalizationProvider>
@@ -178,13 +177,11 @@ const BlogDrawer = ({
                        handleSubmit,
                        setContent,
                        slugError,
-                       saved,
-                       handleSave,
+                       setSlugError,
                        handlePublish,
-                       handleKeyPress,
                        open,
                        setOpen
-}) => {
+                    }) => {
 
    const handleClose = () =>
       setOpen(false);
@@ -208,20 +205,6 @@ const BlogDrawer = ({
                Create a new blog post
             </Typography>
             <Button
-               color='secondary'
-               variant='contained'
-               onClick={handleSave}
-               startIcon={saved ? <DownloadDoneIcon /> : <SaveIcon/>}
-               type={'submit'}
-               form={'blogPostForm'}
-               sx={{
-                  marginRight: 2
-               }}
-            >
-               Save
-            </Button>
-
-            <Button
                color='success'
                variant='contained'
                onClick={handlePublish}
@@ -239,7 +222,7 @@ const BlogDrawer = ({
             handleSubmit={handleSubmit}
             setContent={setContent}
             slugError={slugError}
-            handleKeyPress={handleKeyPress}
+            setSlugError={setSlugError}
          />
       </div>
    </Drawer>
@@ -250,54 +233,27 @@ const BlogPost = () => {
    const [publish, setPublish] = useState(false);
    const [content, setContent] = useState('');
    const [slugError, setSlugError] = useState('');
-   const [saved, setSaved] = useState(false);
-   const [initialSave, setInitialSave] = useState(true);
-   const [postID, setPostID] = useState(null);
-
-   const handleKeyPress = () => {
-      setSaved(false)
-   }
 
    const handlePublish = () =>
       setPublish(true)
 
 
-   const handleSave = (res) => {
-
-      //If the id variable is set then we'll pass it in. This will indicate to the API that the data needs to be
-      //updated rather then creating a new insert into the database. This will be set only if the save button is
-      //pressed
-      if(res.data)
-         setPostID(res.data.id)
-
-      setInitialSave(false);
-      setPublish(false)
-      setSaved(true);
-   }
-
-   const handleSubmit = async (e, arrayData) => {
+   const handleSubmit = async (e, filters) => {
       e.preventDefault();
 
       const getVal = (name) => e.target.elements[name].value
 
       const data = {
-         id: postID,
-         initialSave,
-         blogData: {
-            title: getVal('title'),
-            slug: getVal('slug'),
-            date: getVal('date'),
-            excerpt: getVal('excerpt'),
-            author: getVal('author'),
-            ...arrayData,
-            content,
-            publish,
-         }
+         title: getVal('title'),
+         slug: getVal('slug'),
+         date: getVal('date'),
+         excerpt: getVal('excerpt'),
+         author: getVal('author'),
+         ...filters,
+         content,
+         publish
       }
 
-
-      console.log(data)
-      return
       //Saving the data
       const res = await saveBlog(data)
 
@@ -307,27 +263,23 @@ const BlogPost = () => {
       else
          setSlugError('')
 
-      //If publish is false then it means the Save button is clicked
-      if(!publish)
-         handleSave(res);
 
+      return
       //If Publish button is clicked then the drawer can be closed once the data has been saved to the DB and published
-      if(publish)
+      if (publish)
          setOpenBlogDrawer(false);
    }
 
    return <>
-      <Button onClick={() => setOpenBlogDrawer(true)} variant='contained'>Create New Blog</Button>
+      <Button onClick={() => setOpenBlogDrawer(true)} variant='contained'>Create New Post</Button>
       <BlogDrawer
          handleSubmit={handleSubmit}
          setContent={setContent}
          slugError={slugError}
-         saved={saved}
-         handleSave={handleSave}
+         setSlugError={setSlugError}
          handlePublish={handlePublish}
          open={openBlogDrawer}
          setOpen={setOpenBlogDrawer}
-         handleKeyPress={handleKeyPress}
       />
    </>
 }

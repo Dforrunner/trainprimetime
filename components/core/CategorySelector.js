@@ -95,15 +95,15 @@ const CategorySelector = ({categories = [], onChange = () => ''}) => {
    const [selected, setSelected] = useState([]);
    const [categoryList, setCategoryList] = useState([])
 
-   const isCategorySelected = id => selected.filter(i => i.id === id).length
+   const isCategorySelected = name => selected.includes(name)
 
-   const handleClick = i => {
+   const handleClick = name => {
       //ADD/REMOVE categories
-      if (selected.length && isCategorySelected(i.id)) {
-         const filter = selected.filter(j => j.id !== i.id)
+      if (selected.length && isCategorySelected(name)) {
+         const filter = selected.filter(i => i !== name)
          setSelected(filter)
       } else {
-         setSelected([...selected, i])
+         setSelected([...selected, name])
       }
    }
 
@@ -139,15 +139,15 @@ const CategorySelector = ({categories = [], onChange = () => ''}) => {
          <div className={'flex flex-wrap gap-1'}>
             {categoryList.length
 
-               ? categoryList.map(i => {
-                  const checked = isCategorySelected(i.id);
+               ? categoryList.map(name => {
+                  const checked = isCategorySelected(name);
                   return <Chip
                      key={uuidv4()}
-                     label={i.name}
+                     label={name}
                      variant={checked ? 'soft' : 'plain'}
                      color={checked ? 'primary' : 'secondary'}
                      icon={checked ? <CheckIcon sx={{zIndex: 1, pointerEvents: 'none'}}/> : <></>}
-                     onClick={() => handleClick(i)}
+                     onClick={() => handleClick(name)}
                   />
                })
 

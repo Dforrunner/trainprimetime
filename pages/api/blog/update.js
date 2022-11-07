@@ -5,14 +5,30 @@ export default async (req, res) => {
    if (req.method !== 'POST')
       return res.status(405).json({status: 'error', message: 'Method not allowed'})
 
-   const {id, blogData} = JSON.parse(req.body)
+   const {id, data} = JSON.parse(req.body)
 
-   if(!id)
-      return res.status(409).json({status: 'error', message: 'Missing `id` property'})
+   if(!id || !data.name || data.slug)
+      return res.status(409).json({status: 'error', message: 'Missing required fields'})
+
+
+   //Check to see if the slug exists
+   const slugConflict = await prisma.post.findFirst({
+      where: {
+         slug: data.slug,
+         NOT: {
+            id: id
+         }
+      }
+   })
+
+   //If it exists, then return an error to the client
+   if(slugConflict)
+      return res.status(409).json({status: 'error', field: 'slug', message: 'Slug already exists and they must be unique'})
+
 
    const update = await prisma.post.update({
       where: { id },
-      data: blogData
+      data: data
    })
 
    res.status(200).json({status: 'success', data: update})

@@ -11,24 +11,24 @@ const TagAdder = ({existingTags, onChange = () => {}}) => {
    const [selectedExistingTags, setSelectedExistingTags] = useState([])
    const [value, setValue] = useState('');
 
-   const tagChecked = (key, val) =>
-      selectedExistingTags.filter(i => i[key] === val).length;
+   const tagChecked = name =>
+      selectedExistingTags.includes(name);
 
    const addTag = val => {
       //Ensure tag is only selected once
       if (val.replace(' ', '').length){
-         const tagExists = existingTags.filter(i => i.name === val)
-         if(tagExists.length && !tagChecked('name', val)){
+         const tagExists = existingTags.filter(i => i === val)
+         if(tagExists.length && !tagChecked(val)){
             setSelectedExistingTags([...selectedExistingTags, tagExists[0]])
-         }else if(!tags.includes(val) && !tagChecked('name', val)){
+         }else if(!tags.includes(val) && !tagChecked(val)){
             setTags([...tags, val]);
          }
       }
       setValue('');
    }
 
-   const handleDelete = (value) => {
-      const newtags = tags.filter((val) => val !== value);
+   const handleDelete = val => {
+      const newtags = tags.filter(i => i !== val);
       setTags(newtags);
    };
 
@@ -45,12 +45,12 @@ const TagAdder = ({existingTags, onChange = () => {}}) => {
       }
    };
 
-   const handleSelectExistingTag = data => {
-      if(tagChecked('id', data.id)){
-         const filter = selectedExistingTags.filter(i => i.id !== data.id);
+   const handleSelectExistingTag = name => {
+      if(tagChecked(name)){
+         const filter = selectedExistingTags.filter(i => i !== name);
          setSelectedExistingTags(filter)
       }else{
-         setSelectedExistingTags([...selectedExistingTags, data])
+         setSelectedExistingTags([...selectedExistingTags, name])
       }
    }
 
@@ -86,16 +86,16 @@ const TagAdder = ({existingTags, onChange = () => {}}) => {
          </Typography>
 
          <div className='flex gap-1 py-4'>
-            {existingTags.map(i =>{
-               const checked = tagChecked('name', i.name)
+            {existingTags.map(name =>{
+               const checked = tagChecked(name)
                return (
                   <Chip
                      key={uuidv4()}
-                     label={i.name}
+                     label={name}
                      variant={checked ? 'soft' : 'plain'}
                      color={checked ? 'primary' : 'secondary'}
                      icon={checked && <CheckIcon sx={{zIndex: 1, pointerEvents: 'none'}}/>}
-                     onClick={() => handleSelectExistingTag(i)}
+                     onClick={() => handleSelectExistingTag(name)}
                   />
                )
             })}

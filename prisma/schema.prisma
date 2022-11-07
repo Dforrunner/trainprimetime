@@ -39,15 +39,11 @@ model Services {
 model Tag {
     id                  String      @id @default(auto()) @map("_id") @db.ObjectId
     name                String      @unique
-    postIDs             String[]    @db.ObjectId
-    posts               Post[]      @relation(fields: [postIDs], references: [id])
 }
 
 model Category {
     id                  String      @id @default(auto()) @map("_id") @db.ObjectId
     name                String      @unique
-    postIDs             String[]    @db.ObjectId
-    posts               Post[]      @relation(fields: [postIDs], references: [id])
 }
 
 
@@ -59,15 +55,13 @@ model Post {
     excerpt             String?
     author              String?
     userId              Int?
-    publish             Boolean?    @default(false)
+    publish             Boolean?    @default(true)
     isScheduled         Boolean?    @default(false)
     publishDate         DateTime?   @default(now())
     img                 Bytes?
     createdOn           DateTime    @default(now())
-    categoryIDs         String[]    @db.ObjectId
-    categories          Category[]  @relation(fields: [categoryIDs], references: [id])
-    tagIDs              String[]    @db.ObjectId
-    tags                Tag[]       @relation(fields: [tagIDs], references: [id])
+    categories          String[]
+    tags                String[]
     content             String?
 }
 
