@@ -10,7 +10,7 @@ export default async (req, res) => {
    if(!id)
       return res.status(409).json({status: 'error', message: 'Missing `id` property'})
 
-   const update = await prisma.blogs.update({
+   const update = await prisma.post.update({
       where: { id },
       data: blogData
    })

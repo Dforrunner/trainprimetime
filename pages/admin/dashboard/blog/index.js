@@ -41,7 +41,7 @@ export default Page;
 
 
 export const getServerSideProps = async (ctx) => {
-   const blogs = await prisma.blogs.findMany();
+   const blogs = await prisma.post.findMany();
 
    return {
       props: {

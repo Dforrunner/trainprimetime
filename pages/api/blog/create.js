@@ -13,7 +13,7 @@ export default async (req, res) => {
    //If the post data contains the post id then that means the user has already saved the data once, and they
    //trying to save it again, in which case we need to update the data rather than creating a new entry
    if(!initialSave && id){
-      const update = await prisma.blogs.update({
+      const update = await prisma.post.update({
          where: { id },
          data: blogData
       })
@@ -22,7 +22,7 @@ export default async (req, res) => {
    }
 
    //Check to see if the slug exists
-   const slugConflict = await prisma.blogs.findFirst({
+   const slugConflict = await prisma.post.findFirst({
       where: {
          slug: blogData.slug
       }
@@ -33,7 +33,7 @@ export default async (req, res) => {
       return res.status(409).json({status: 'error', field: 'slug', message: 'Slug already exists and they must be unique'})
 
    //Insert the date into the DB
-   const saveBlog = await prisma.blogs.create({
+   const saveBlog = await prisma.post.create({
       data: blogData
    })
 

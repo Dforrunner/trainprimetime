@@ -13,74 +13,61 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
 }
 
 model Home {
-    id                  Int         @id @default(autoincrement())
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
     headerText          String?
     headerButtonText    String?
     headerImg           String?
 }
 
 model Testimonials {
-    id                  Int         @id @default(autoincrement())
-    text                String      @db.Text
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
+    text                String
     writter             String
 }
 
 model Services {
-    id                  Int         @id @default(autoincrement())
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
     name                String
-    summery             String      @db.Text
+    summery             String
 }
 
 model Tag {
-     id                    Int                 @id @default(autoincrement())
-     name                  String
-     blog                  TagsOnBlogs[]
-}
-
-model TagsOnBlogs {
-    blog                  Blogs     @relation(fields: [blogId], references: [id])
-    blogId                Int // relation scalar field (used in the `@relation` attribute above)
-    tag                   Tag @relation(fields: [tagId], references: [id])
-    tagId                 Int // relation scalar field (used in the `@relation` attribute above)
-
-    @@id([blogId, tagId])
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
+    name                String      @unique
+    postIDs             String[]    @db.ObjectId
+    posts               Post[]      @relation(fields: [postIDs], references: [id])
 }
 
 model Category {
-  id                    Int                 @id @default(autoincrement())
-  name                  String              @unique
-  blogs                 CategoriesOnBlogs[]
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
+    name                String      @unique
+    postIDs             String[]    @db.ObjectId
+    posts               Post[]      @relation(fields: [postIDs], references: [id])
 }
 
-model CategoriesOnBlogs {
-  blog                  Blogs     @relation(fields: [blogId], references: [id])
-  blogId                Int // relation scalar field (used in the `@relation` attribute above)
-  category              Category @relation(fields: [categoryId], references: [id])
-  categoryId            Int // relation scalar field (used in the `@relation` attribute above)
 
-  @@id([blogId, categoryId])
-}
-
-model Blogs {
-    id                  Int         @id @default(autoincrement())
+model Post {
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
     title               String
     slug                String      @unique
-    date                DateTime    @default(now())  @db.Date
-    excerpt             String?     @db.Text
+    date                DateTime    @default(now()) @db.Date
+    excerpt             String?
     author              String?
-    content             String?     @db.Text
     userId              Int?
     publish             Boolean?    @default(false)
     isScheduled         Boolean?    @default(false)
     publishDate         DateTime?   @default(now())
-    imgSrc              String?
+    img                 Bytes?
     createdOn           DateTime    @default(now())
-    categories          CategoriesOnBlogs[]
-    tags                TagsOnBlogs[]
+    categoryIDs         String[]    @db.ObjectId
+    categories          Category[]  @relation(fields: [categoryIDs], references: [id])
+    tagIDs              String[]    @db.ObjectId
+    tags                Tag[]       @relation(fields: [tagIDs], references: [id])
+    content             String?
 }
 

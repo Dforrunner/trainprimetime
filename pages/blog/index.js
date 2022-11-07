@@ -39,7 +39,6 @@ const Blog = ({blogs}) => {
          : <div className='text-3xl p-5 min-h-[480px]'>Coming Soon...</div>
       }
 
-
       {postCount > showPerPage &&
       <div className='flex justify-center my-10'>
          <Pagination count={Math.ceil(postCount/showPerPage)} page={page} onChange={handleChange} />
@@ -52,7 +51,7 @@ const Blog = ({blogs}) => {
 }
 
 export const getStaticProps = async () => {
-   const blogs = await prisma.blogs.findMany({
+   const blogs = await prisma.post.findMany({
       where: {
          publish: true
       }
