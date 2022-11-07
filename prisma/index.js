@@ -15,7 +15,7 @@ prisma.$use(async (params, next) => {
    const convertDateObj = (obj) =>
       Object.keys(obj).map(key => {
          if(obj[key] instanceof Date && !isNaN(obj[key])){
-            obj[key] = dayjs(obj[key]).format('MMMM, DD YYYY')
+            obj[key] = dayjs(obj[key]).format('MMMM D, YYYY')
          }
       })
 

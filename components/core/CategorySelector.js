@@ -1,8 +1,6 @@
-import CheckIcon from '@mui/icons-material/Check';
 import {Chip, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import {v4 as uuidv4} from "uuid";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,6 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import PillSelector from "./PillSelector";
 
 const AddCategoryDialog = ({onAdd = () => ''}) => {
    const [open, setOpen] = useState(false);
@@ -48,7 +47,7 @@ const AddCategoryDialog = ({onAdd = () => ''}) => {
 
             setError('')
             setOpen(false)
-            onAdd(data)
+            onAdd(data.name)
             setCategoryName('')
          })
          .catch(console.error)
@@ -95,17 +94,8 @@ const CategorySelector = ({categories = [], onChange = () => ''}) => {
    const [selected, setSelected] = useState([]);
    const [categoryList, setCategoryList] = useState([])
 
-   const isCategorySelected = name => selected.includes(name)
-
-   const handleClick = name => {
-      //ADD/REMOVE categories
-      if (selected.length && isCategorySelected(name)) {
-         const filter = selected.filter(i => i !== name)
-         setSelected(filter)
-      } else {
-         setSelected([...selected, name])
-      }
-   }
+   const handleChange = data =>
+      setSelected(data)
 
    /**
     * @param newCategory :{id: int, name: string}
@@ -133,27 +123,19 @@ const CategorySelector = ({categories = [], onChange = () => ''}) => {
             <Typography mb={2}>
                Select Categories
             </Typography>
-            <AddCategoryDialog onAdd={handleAddNewCategory}/>
+
+            <AddCategoryDialog
+               onAdd={handleAddNewCategory}
+            />
          </div>
 
-         <div className={'flex flex-wrap gap-1'}>
-            {categoryList.length
+         <PillSelector
+            data={categoryList}
+            selectedData={selected}
+            noDataMessage={'Categories haven\'t been created'}
+            onChange={handleChange}
+         />
 
-               ? categoryList.map(name => {
-                  const checked = isCategorySelected(name);
-                  return <Chip
-                     key={uuidv4()}
-                     label={name}
-                     variant={checked ? 'soft' : 'plain'}
-                     color={checked ? 'primary' : 'secondary'}
-                     icon={checked ? <CheckIcon sx={{zIndex: 1, pointerEvents: 'none'}}/> : <></>}
-                     onClick={() => handleClick(name)}
-                  />
-               })
-
-               : <span className='py-5'>Categories haven't been created</span>
-            }
-         </div>
          <p className='text-[12px] text-grey-600 ml-2 mt-1'>
             What categories should this post be assigned to? Select by clicking on the category
          </p>

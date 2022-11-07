@@ -13,6 +13,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import UploadIcon from '@mui/icons-material/Upload';
 import Checkbox from '@mui/material/Checkbox';
+import FileUploader from "../FileUploader";
 
 const CustomInput = (props) =>
    <TextField
@@ -43,6 +44,10 @@ const Blog = ({
    const [selectedCategories, setSelectedCategories] = useState([]);
    const [existingTags, setExistingTags] = useState([]);
    const [existingCategories, setExistingCategories] = useState([]);
+   const [img, setImg] = useState(null);
+
+   const handleImgUpload = file =>
+      setImg(file)
 
    const handleChange = (newValue) => {
       setValue(newValue);
@@ -56,7 +61,7 @@ const Blog = ({
       setSelectedCategories(data)
 
    const onSubmit = e =>
-      handleSubmit(e, {tags: selectedTags, categories: selectedCategories})
+      handleSubmit(e, {tags: selectedTags, categories: selectedCategories}, img)
 
 
    useEffect(() => {
@@ -161,6 +166,23 @@ const Blog = ({
             categories={existingCategories}
             onChange={handleCategories}
          />
+
+         <div className='border-[1px] border-[rgba(0,0,0,0.2)] rounded p-3'>
+            <Typography mb={2}>
+               Header Image
+            </Typography>
+
+            <FileUploader
+               onChange={handleImgUpload}
+               showFilename={true}
+               toBase64={true}
+            />
+
+            <p className='text-[12px] text-grey-600 ml-2 mt-1'>
+               Select a header image for you post. This will also be used for the thumbnails
+            </p>
+         </div>
+
       </Card>
       <Card className='py-5 px-10'>
          <div className='pb-5'>
@@ -190,6 +212,11 @@ const BlogDrawer = ({
       anchor={'right'}
       open={open}
       onClose={() => setOpen(false)}
+      PaperProps={{
+         sx: {
+            width: '100%',
+         },
+      }}
    >
       <AppBar sx={{position: 'sticky', top: 0, padding: '0 10px 0 10px'}}>
          <Toolbar>
@@ -238,7 +265,7 @@ const BlogPost = () => {
       setPublish(true)
 
 
-   const handleSubmit = async (e, filters) => {
+   const handleSubmit = async (e, filters, img) => {
       e.preventDefault();
 
       const getVal = (name) => e.target.elements[name].value
@@ -249,6 +276,7 @@ const BlogPost = () => {
          date: getVal('date'),
          excerpt: getVal('excerpt'),
          author: getVal('author'),
+         img,
          ...filters,
          content,
          publish
@@ -263,8 +291,6 @@ const BlogPost = () => {
       else
          setSlugError('')
 
-
-      return
       //If Publish button is clicked then the drawer can be closed once the data has been saved to the DB and published
       if (publish)
          setOpenBlogDrawer(false);

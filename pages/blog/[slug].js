@@ -20,9 +20,15 @@ const BlogPost = ({post}) => {
 
       <div className='w-[90%] m-auto mt-[-120px] p-10 bg-white rounded'>
          <div className='text-center space-y-4'>
+            <div className='flex justify-center items-center gap-1'>
+               {categories && categories.map(i =>
+                  <span key={uuidv4()} className='p-2 bg-secondary rounded text-white text-sm'>{i}</span>
+               )
+
+               }
+            </div>
             <h1 className='text-2xl'>{title}</h1>
             <p className='text-sm'>{date} | By {author} </p>
-            <p>Categories: {categories}</p>
             <p>
                {excerpt}
             </p>

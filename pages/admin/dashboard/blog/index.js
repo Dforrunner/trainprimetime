@@ -18,7 +18,7 @@ const Page = ({blogs}) => {
       <h1>Blog</h1>
       <BlogPost />
 
-      <div className='flex flex-wrap'>
+      <div className='flex flex-wrap justify-center'>
          {blogs.slice(visibleIndex, visibleIndex+showPerPage).map(i =>
             <BlogCard
                key={uuidv4()}

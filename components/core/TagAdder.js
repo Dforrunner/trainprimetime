@@ -2,9 +2,7 @@ import {TextField, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import AddIcon from '@mui/icons-material/Add';
 import RemovablePill from './RemovablePill';
-import Chip from '@mui/material/Chip';
-import {v4 as uuidv4} from "uuid";
-import CheckIcon from "@mui/icons-material/Check";
+import PillSelector from "./PillSelector";
 
 const TagAdder = ({existingTags, onChange = () => {}}) => {
    const [tags, setTags] = useState([]);
@@ -45,14 +43,8 @@ const TagAdder = ({existingTags, onChange = () => {}}) => {
       }
    };
 
-   const handleSelectExistingTag = name => {
-      if(tagChecked(name)){
-         const filter = selectedExistingTags.filter(i => i !== name);
-         setSelectedExistingTags(filter)
-      }else{
-         setSelectedExistingTags([...selectedExistingTags, name])
-      }
-   }
+   const handleSelectExistingTag = name =>
+         setSelectedExistingTags(name)
 
    useEffect(() => {
       onChange({newTags: tags, existingTags: selectedExistingTags});
@@ -85,21 +77,11 @@ const TagAdder = ({existingTags, onChange = () => {}}) => {
             Select From Existing Tags
          </Typography>
 
-         <div className='flex gap-1 py-4'>
-            {existingTags.map(name =>{
-               const checked = tagChecked(name)
-               return (
-                  <Chip
-                     key={uuidv4()}
-                     label={name}
-                     variant={checked ? 'soft' : 'plain'}
-                     color={checked ? 'primary' : 'secondary'}
-                     icon={checked && <CheckIcon sx={{zIndex: 1, pointerEvents: 'none'}}/>}
-                     onClick={() => handleSelectExistingTag(name)}
-                  />
-               )
-            })}
-         </div>
+         <PillSelector
+            data={existingTags}
+            selectedData={selectedExistingTags}
+            onChange={handleSelectExistingTag}
+         />
 
          <p className='text-[12px] text-grey-600 ml-2 mt-1'>
             Add tags to your post. These will be used to filter posts and also added as SEO keywords
