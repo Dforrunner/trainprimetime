@@ -77,7 +77,10 @@ const Navigation = props => {
       shadowRef.current.classList.remove('d-block')
     }
   }
-  const ScrollWrapper = hidden ? Box : PerfectScrollbar
+  const ScrollWrapper = props =>
+     hidden
+        ? <Box {...props} />
+        : <PerfectScrollbar  containerRef={ref => handleInfiniteScroll(ref)} {...props}/>
 
   return (
     <Drawer {...props}>
@@ -93,7 +96,6 @@ const Navigation = props => {
       />
       <Box sx={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
         <ScrollWrapper
-          containerRef={ref => handleInfiniteScroll(ref)}
           {...(hidden
             ? {
                 onScroll: container => scrollMenu(container),

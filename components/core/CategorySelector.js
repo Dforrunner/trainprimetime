@@ -42,13 +42,13 @@ const AddCategoryDialog = ({onAdd = () => ''}) => {
          body: JSON.stringify({categoryName})
       })
          .then(res => res.json())
-         .then(({status, message}) => {
+         .then(({status, data, message}) => {
             if(status === 'error')
                return setError(message)
 
             setError('')
             setOpen(false)
-            onAdd(categoryName)
+            onAdd(data)
             setCategoryName('')
          })
          .catch(console.error)
@@ -91,43 +91,46 @@ const AddCategoryDialog = ({onAdd = () => ''}) => {
 }
 
 
-export default function CategorySelector({categories = [], onChange = () => ''}) {
+const CategorySelector = ({categories = [], onChange = () => ''}) => {
    const [selected, setSelected] = useState([]);
    const [categoryList, setCategoryList] = useState([])
 
-   const handleClick = val => {
-      if (selected.includes(val)) {
-         const filter = selected.filter(i => i !== val)
+   const isCategorySelected = id => selected.filter(i => i.id === id).length
+
+   const handleClick = i => {
+      //ADD/REMOVE categories
+      if (selected.length && isCategorySelected(i.id)) {
+         const filter = selected.filter(j => j.id !== i.id)
          setSelected(filter)
       } else {
-         setSelected([...selected, val])
+         setSelected([...selected, i])
       }
-      onChange(selected);
    }
 
+   /**
+    * @param newCategory :{id: int, name: string}
+    */
    const handleAddNewCategory = newCategory => {
-      console.log({newCategory})
       setCategoryList([...categoryList, newCategory])
       setSelected([...selected, newCategory])
    }
 
+   //Update category list state and re-render
    useEffect(() => {
-      if(categories.length){
-         //Get names, capitalize them, then add them into an array
-         const names = categories.reduce((acc, {name}) => {
-            const capitalized = name[0].toUpperCase() + name.slice(1)
-            acc.push(capitalized)
-            return acc
-         }, [])
-         setCategoryList(names)
-      }
+      if(categories.length)
+         setCategoryList(categories)
    }, [categories])
+
+   //Update onChange function param everytime selected categories change
+   useEffect(() => {
+      onChange(selected);
+   }, [selected])
 
    return (
       <div className='border-[1px] border-[rgba(0,0,0,0.2)] rounded p-3'>
 
          <div className='flex justify-between items-center w-full '>
-            <Typography fontWeight='md' fontSize='lg' id='fav-movie' mb={2}>
+            <Typography mb={2}>
                Select Categories
             </Typography>
             <AddCategoryDialog onAdd={handleAddNewCategory}/>
@@ -136,19 +139,19 @@ export default function CategorySelector({categories = [], onChange = () => ''})
          <div className={'flex flex-wrap gap-1'}>
             {categoryList.length
 
-               ? categoryList.map(name => {
-                  const checked = selected.includes(name);
+               ? categoryList.map(i => {
+                  const checked = isCategorySelected(i.id);
                   return <Chip
                      key={uuidv4()}
-                     label={name}
+                     label={i.name}
                      variant={checked ? 'soft' : 'plain'}
                      color={checked ? 'primary' : 'secondary'}
-                     icon={checked && <CheckIcon sx={{zIndex: 1, pointerEvents: 'none'}}/>}
-                     onClick={() => handleClick(name)}
+                     icon={checked ? <CheckIcon sx={{zIndex: 1, pointerEvents: 'none'}}/> : <></>}
+                     onClick={() => handleClick(i)}
                   />
                })
 
-               : "Categories haven't been created"
+               : <span className='py-5'>Categories haven't been created</span>
             }
          </div>
          <p className='text-[12px] text-grey-600 ml-2 mt-1'>
@@ -157,3 +160,5 @@ export default function CategorySelector({categories = [], onChange = () => ''})
       </div>
    );
 }
+
+export default CategorySelector;
