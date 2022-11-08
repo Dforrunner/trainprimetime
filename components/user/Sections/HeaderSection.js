@@ -22,9 +22,12 @@ const HeaderSection = ({title, summary, btnTitle, btnHref, bgImg = '/img/dumbell
             {summary}
          </p>
 
-         <div className='w-[200px]'>
-            <SliderLeftBtn title={btnTitle} href={btnHref}/>
-         </div>
+         {btnTitle &&
+            <div className='w-[200px]'>
+               <SliderLeftBtn title={btnTitle} href={btnHref}/>
+            </div>
+         }
+
       </div>
    </header>
 

@@ -1,16 +1,8 @@
-// ** MUI Imports
-import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
-
-// ** Layout Imports
-// !Do not remove this Layout import
 import VerticalLayout from '../components/admin/VerticalLayout'
-
-// ** Navigation Imports
 import VerticalNavItems from '../components/admin/NavItems';
-
-// ** Component Import
 import VerticalAppBarContent from '../components/admin/AppBarContent'
+import {SnackbarProvider} from 'notistack';
 
 // ** Hook Import
 import {useSettings} from '../hooks/useSettings'
@@ -35,28 +27,30 @@ const DashboardLayout = ({children}) => {
    return (
       <>
          <NextNProgress/>
-         <VerticalLayout
-            hidden={hidden}
-            settings={settings}
-            saveSettings={saveSettings}
-            verticalNavItems={VerticalNavItems()} // Navigation Items
-            verticalAppBarContent={(
-               props // AppBar Content
-            ) => (
-               <VerticalAppBarContent
-                  hidden={hidden}
-                  settings={settings}
-                  saveSettings={saveSettings}
-                  toggleNavVisibility={props.toggleNavVisibility}
-               />
-            )}
-         >
-            <main className='relative'>
-               {children}
-               <div className='h-[80px]' />
-            </main>
+         <SnackbarProvider maxSnack={4}>
+            <VerticalLayout
+               hidden={hidden}
+               settings={settings}
+               saveSettings={saveSettings}
+               verticalNavItems={VerticalNavItems()} // Navigation Items
+               verticalAppBarContent={(
+                  props // AppBar Content
+               ) => (
+                  <VerticalAppBarContent
+                     hidden={hidden}
+                     settings={settings}
+                     saveSettings={saveSettings}
+                     toggleNavVisibility={props.toggleNavVisibility}
+                  />
+               )}
+            >
+               <main className='relative'>
+                  {children}
+                  <div className='h-[80px]'/>
+               </main>
 
-         </VerticalLayout>
+            </VerticalLayout>
+         </SnackbarProvider>
       </>
 
    )

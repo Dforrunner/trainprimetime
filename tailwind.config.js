@@ -26,6 +26,7 @@ module.exports = {
       'primary-dark': '#181415',
       secondary: '#e84039',
       'secondary-dark': '#e73128',
+      'secondary-transparent': 'rgba(232,64,57,0.7)',
       third: '#2faee2',
       'gray-dark': '#273444',
       'gray': '#8492a6',

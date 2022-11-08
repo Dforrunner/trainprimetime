@@ -2,13 +2,10 @@ import {DocHead} from "../../components/user";
 import prisma from "../../prisma";
 import {BlogCard} from "../../components/core/Blog";
 import {v4 as uuidv4} from 'uuid';
-import {HeaderSection} from "../../components/user/Sections";
 import {useState, useEffect} from "react";
 import Pagination from '@mui/material/Pagination';
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import Magnify from "mdi-material-ui/Magnify";
 import PillSelector from "../../components/core/PillSelector";
+import {HeaderSection} from "../../components/user/Sections";
 
 
 const Blog = ({posts, categoryList, tagList}) => {
@@ -49,19 +46,18 @@ const Blog = ({posts, categoryList, tagList}) => {
    return <>
       <DocHead title='Blog - PrimeTime Personal Training'/>
 
+      <HeaderSection
+         title='PRIMETIME BLOG'
+         summary='Taking your fitness and nutrition education to the next level!'
+         bgImg={'/img/stairs.jpg'}
+      />
+
       <div className='flex flex-col md:flex-row w-full flex-grow-1'>
 
          <div className='flex flex-col w-full md:w-[300px]'>
-            <h1 className='w-full p-5 text-center bg-secondary text-white font-bold' >
-               PRIMETIME BLOG
-            </h1>
-
-            <p className='text-sm p-5 text-grey-600 italic'>
-               Taking your fitness and nutrition education to the next level!
-            </p>
 
             <div className='px-5'>
-               <div className='w-full font-bold text-center border-b-[1px]'>
+               <div className='w-full font-bold text-center border-b-[1px] mt-5'>
                   Filter Posts
                </div>
 
@@ -95,9 +91,10 @@ const Blog = ({posts, categoryList, tagList}) => {
             {postCount
                ? <div className={'w-full flex flex-wrap justify-center bg-white text-black p-5'}>
 
-                  {filterPosts.slice(visibleIndex, visibleIndex + showPerPage).map(i =>
+                  {filterPosts.slice(visibleIndex, visibleIndex + showPerPage).map((i, index) =>
                      <BlogCard
                         key={uuidv4()}
+                        transitionDelay={index * 200}
                         {...i}
                      />
                   )}
